@@ -1,0 +1,227 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: "ue-font";
+    src: url("ue-font.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+[data-icon]:before {
+    font-family: "ue-font" !important;
+    content: attr(data-icon);
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="ue-icon-"]:before,
+[class*=" ue-icon-"]:before {
+    font-family: "ue-font" !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-variant: normal !important;
+    text-transform: none !important;
+    speak: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.ue-icon-facebook-filled:before {
+    content: "\61";
+}
+
+.ue-icon-facebook-stroke:before {
+    content: "\62";
+}
+
+.ue-icon-instagram-filled:before {
+    content: "\63";
+}
+
+.ue-icon-instagram-stroke:before {
+    content: "\64";
+}
+
+.ue-icon-linkedin-filled:before {
+    content: "\65";
+}
+
+.ue-icon-linkedin-stroke:before {
+    content: "\66";
+}
+
+.ue-icon-rss-filled:before {
+    content: "\67";
+}
+
+.ue-icon-rss-stroke:before {
+    content: "\68";
+}
+
+.ue-icon-twitter-filled:before {
+    content: "\69";
+}
+
+.ue-icon-twitter-stroke:before {
+    content: "\6a";
+}
+
+.ue-icon-youtube-filled:before {
+    content: "\6b";
+}
+
+.ue-icon-youtube-stroke:before {
+    content: "\6c";
+}
+
+.ue-icon-fv-rnd-stroke:before {
+    content: "\6e";
+}
+
+.ue-icon-fv-rnd-filled:before {
+    content: "\6f";
+}
+
+.ue-icon-ls:before {
+    content: "\72";
+}
+
+.ue-icon-ls-rnd-stroke:before {
+    content: "\73";
+}
+
+.ue-icon-eh:before {
+    content: "\74";
+}
+
+.ue-icon-eh-rnd-stroke:before {
+    content: "\75";
+}
+
+.ue-icon-ls-rnd-filled:before {
+    content: "\76";
+}
+
+.ue-icon-ss:before {
+    content: "\77";
+}
+
+.ue-icon-eh-rnd-filled:before {
+    content: "\78";
+}
+
+.ue-icon-en:before {
+    content: "\79";
+}
+
+.ue-icon-en-rnd-stroke:before {
+    content: "\7a";
+}
+
+.ue-icon-en-rnd-filled:before {
+    content: "\41";
+}
+
+.ue-icon-fk:before {
+    content: "\42";
+}
+
+.ue-icon-fk-rnd-stroke:before {
+    content: "\43";
+}
+
+.ue-icon-fk-rnd-filled:before {
+    content: "\44";
+}
+
+.ue-icon-fv:before {
+    content: "\45";
+}
+
+.ue-icon-ss-rnd-stroke:before {
+    content: "\46";
+}
+
+.ue-icon-ss-rnd-filled:before {
+    content: "\47";
+}
+
+.ue-icon-wp:before {
+    content: "\48";
+}
+
+.ue-icon-wp-rnd-stroke:before {
+    content: "\49";
+}
+
+.ue-icon-wp-rnd-filled:before {
+    content: "\4a";
+}
+
+.ue-icon-ms-avtal:before {
+    content: "\4b";
+}
+
+.ue-icon-ms-dashboard:before {
+    content: "\4c";
+}
+
+.ue-icon-ms-fakturor:before {
+    content: "\4d";
+}
+
+.ue-icon-ms-messages:before {
+    content: "\4e";
+}
+
+.ue-icon-bb-rnd-stroke:before {
+    content: "\6d";
+}
+
+.ue-icon-bb-rnd-filled:before {
+    content: "\70";
+}
+
+.ue-icon-bb:before {
+    content: "\71";
+}
+.ue-icon-efaktura-stroke:before {
+    content: "\4f";
+}
+.ue-icon-pappersfaktura-stroke:before {
+    content: "\50";
+}
+.ue-icon-ue-notification-filled:before {
+    content: "\51";
+}
+
+.ue-icon-doc:before {
+    content: "\52";
+}
+
+.ue-icon-doc-filled:before {
+    content: "\53";
+}
+
+.ue-icon-pdf:before {
+    content: "\54";
+}
+
+.ue-icon-pdf-filled:before {
+    content: "\55";
+}
+
+.ue-icon-xls:before {
+    content: "\56";
+}
+
+.ue-icon-xls-filled:before {
+    content: "\57";
+}
