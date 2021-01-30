@@ -1,7 +1,7 @@
 <template>
-  <nav class="block md:hidden bg-white fixed bottom-0 w-full shadow-xl">
-    <ul class="flex justify-between">
-      <li class="px-4 py-6 sm:px-6" v-for="link in links" :key="link.name" >
+  <nav class="block md:hidden bg-green-50 fixed bottom-0 w-full">
+    <ul class="flex justify-around">
+      <li class="flex-grow py-6" v-for="link in links" :key="link.name" >
         <IconButton size="32" :icon="link.icon"><span class="font-light whitespace-nowrap text-sm">{{link.name}}</span></IconButton>
       </li>
     </ul>
@@ -48,8 +48,8 @@ export default {
 };
 </script>
 
-<style >
-.mark p {
-  @apply mb-4;
+<style scoped>
+nav {
+  box-shadow: 0 8px 15px 8px rgb(0 0 0 / 50%);
 }
 </style>

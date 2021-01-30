@@ -19,11 +19,13 @@ export default {
   css: [
     '~/assets/global.css',
     '~/assets/ue-icons.css',
+    '@braid/vue-formulate/dist/snow.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/dynamic-components.js'
+    '~/plugins/dynamic-components.js',
+    '~/plugins/vue-formulate',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
