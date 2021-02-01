@@ -1,7 +1,7 @@
 <template>
   <header class="relative text-gray-600" style="z-index: 20">
     <nav
-      :class="{ 'navbar--hidden': !showNavbar, 'navbar--shadow': showShadow }"
+      :class="{ 'navbar--hidden': !showNavbar, 'navbar--shadow': showShadow, 'navbar--disabled': !isListening}"
       class="navbar w-full bg-white"
     >
       <div class="max-w-7xl mx-auto lg:px-4">
@@ -38,7 +38,7 @@
         <div class="navbar-sub-links bg-opacity-25 h-0"></div>
       </div>
     </nav>
-    <div class="h-36"></div>
+    <div class="h-6 md:h-36"></div>
   </header>
 </template>
 
@@ -114,7 +114,7 @@ export default {
         window.removeEventListener("scroll", this.onScroll);
         this.showNavbar = true;
         this.lastScrollPosition = 0;
-        this.showShadow = true;
+        this.showShadow = false;
       } else if (window.innerWidth >= 768 && !this.isListening) {
         window.addEventListener("scroll", this.onScroll);
         this.isListening = true;
@@ -126,7 +126,6 @@ export default {
     if(window.innerWidth >= 768) {
       window.addEventListener("scroll", this.onScroll);
       this.isListening = true;
-      this.showShadow = true;
     }
     window.addEventListener("resize", this.onResize);
   },
@@ -162,8 +161,11 @@ export default {
 }
 .navbar.navbar--shadow {
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
-
 }
+.navbar.navbar--disabled {
+  position: static;
+}
+
 .top-link {
   border-bottom-color: transparent;
   border-bottom-style: solid;
