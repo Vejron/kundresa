@@ -1,5 +1,5 @@
 <template>
-  <a href="#" class="flex flex-col items-center">
+  <div class="flex flex-col items-center">
     <svg
       class=""
       xmlns="http://www.w3.org/2000/svg"
@@ -12,7 +12,7 @@
       <path fill="rgba(0,0,0, 0.51)" :d="icon" />
     </svg>
     <slot></slot>
-  </a>
+  </div>
 </template>
 
 <script>

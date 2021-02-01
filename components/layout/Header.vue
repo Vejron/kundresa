@@ -22,7 +22,7 @@
       <div class="max-w-7xl mx-auto lg:px-4">
         <div class="navigation-bar text-lg flex justify-between h-16">
           <nuxt-link to="/" class="flex items-center pl-2">
-            <Logo class="h-10 logo" :class="{ 'logo--shrink': showShadow }" />
+            <Logo class="h-10 logo"/>
             <span class="top-link font-medium ml-2">Fake snake AB</span>
           </nuxt-link>
           <ul class="hidden md:flex items-center">
@@ -50,6 +50,7 @@ export default {
       showShadow: false,
       showMobile: false,
       lastScrollPosition: 0,
+      isListening: false,
       topLinks: [
         {
           name: "El",
@@ -107,13 +108,31 @@ export default {
       this.showNavbar = currentScrollPosition < this.lastScrollPosition;
       this.lastScrollPosition = currentScrollPosition;
     },
+    onResize() {
+      if(window.innerWidth < 768 && this.isListening) {
+        this.isListening = false;
+        window.removeEventListener("scroll", this.onScroll);
+        this.showNavbar = true;
+        this.lastScrollPosition = 0;
+        this.showShadow = true;
+      } else if (window.innerWidth >= 768 && !this.isListening) {
+        window.addEventListener("scroll", this.onScroll);
+        this.isListening = true;
+      }
+    }
   },
 
   mounted() {
-    window.addEventListener("scroll", this.onScroll);
+    if(window.innerWidth >= 768) {
+      window.addEventListener("scroll", this.onScroll);
+      this.isListening = true;
+      this.showShadow = true;
+    }
+    window.addEventListener("resize", this.onResize);
   },
   beforeDestroy() {
     window.removeEventListener("scroll", this.onScroll);
+    window.removeEventListener("resize", this.onResize);
   },
 };
 </script>
