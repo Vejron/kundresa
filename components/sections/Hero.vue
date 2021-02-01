@@ -17,19 +17,19 @@
         lokalproducerade och 100% miljövänliga
       </p>
 
-      <div class="grid grid-cols-3 gap-8 lg:gap-12">
+      <div class="grid grid-cols-3 gap-6 md:gap-8 lg:gap-12">
         <div
           v-for="(window, i) in windows"
           :key="i"
           :style="{
             'background-image': 'url(' + blok.image.filename + ')',
-            'transform': 'rotateZ(' + (Math.random() - 0.5) * 6 + 'deg)',
+            'transform': 'rotate3D(0, 0, 1,' + (Math.random() - 0.5) * 6 + 'deg)',
           }"
           :class="{
             'col-span-2': i === 3 || i === 6,
-            'gradient-cover': window.exists
+            'gradient-cover bg-fixed': window.exists,
           }"
-          class="bg-fixed shadow-md h-32 lg:h-46 rounded-md flex justify-center items-center text-white text-2xl lg:text-4xl font-extrabold"
+          class="shadow-md h-32 lg:h-46 rounded-md flex justify-center items-center text-white text-2xl lg:text-4xl font-extrabold"
         >
           <a
             class="absolute p-12"
