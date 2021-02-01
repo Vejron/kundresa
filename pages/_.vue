@@ -53,7 +53,6 @@ export default {
     return context.app.$storyapi.get(`cdn/stories/${context.params.pathMatch}`, {
       version: 'draft'
     }).then((res) => {
-      console.warn('warn', JSON.stringify(context.params))
       return res.data
     }).catch((res) => {
       if (!res.response) {
@@ -65,6 +64,24 @@ export default {
         context.error({ statusCode: res.response.status, message: res.response.data })
       }
     })
+  },
+  async fetch(context) {
+    // Loading reference data once - Testamonials
+    if(context.store.state.testamonials.loaded !== '1') {
+
+      let testamonialsRefRes = await context.app.$storyapi.get(`cdn/stories/`, { starts_with: 'testamonials/', version: 'draft' })
+     
+      context.store.commit('testamonials/setTestamonials', testamonialsRefRes.data.stories)
+      context.store.commit('testamonials/setLoaded', '1')
+    }
+    // Loading reference data once - Nyheter
+    if(context.store.state.articles.loaded !== '1') {
+
+      let articlesRefRes = await context.app.$storyapi.get(`cdn/stories/`, { starts_with: 'nyheter/', version: 'draft' })
+     
+      context.store.commit('articles/setArticles', articlesRefRes.data.stories)
+      context.store.commit('articles/setLoaded', '1')
+    }
   },
 }
 </script>

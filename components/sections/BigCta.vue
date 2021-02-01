@@ -67,7 +67,6 @@ export default {
       const featuredTestamonials = this.$store.state.testamonials.testamonials.filter((testamonial) => {
         return this.blok.testamonials.includes(testamonial.uuid)
       })
-      console.warn(JSON.stringify(featuredTestamonials));
       return featuredTestamonials
     }
   }

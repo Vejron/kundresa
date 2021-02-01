@@ -138,7 +138,7 @@
 export default {
   data() {
     return {
-      footer: Object,
+      //footer: Object,
     };
   },
   // fetch from graphCMS with GraphQL

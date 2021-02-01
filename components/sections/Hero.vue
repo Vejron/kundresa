@@ -23,7 +23,6 @@
           :key="i"
           :style="{
             'background-image': 'url(' + blok.image.filename + ')',
-            
             'transform': 'rotateZ(' + (Math.random() - 0.5) * 6 + 'deg)',
           }"
           :class="{

@@ -13,7 +13,7 @@
             <nuxt-link to="/" class="pl-2">Företag</nuxt-link>
           </div>
           <div>
-            <nuxt-link to="/">Driftstatus</nuxt-link>
+            <a href="https://driftinfo10.surge.sh/history">Driftstatus</a>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@ export default {
         },
         {
           name: "Nyheter",
-          url: "/",
+          url: "/nyheter",
         },
         {
           name: "Produkter",

@@ -5,7 +5,6 @@
       :key="story.content._uid"
       :blok="story.content"
       :is="story.content.component" />
-    <Journey/>
   </section>
 </template>
 
@@ -71,13 +70,15 @@ export default {
     if(context.store.state.testamonials.loaded !== '1') {
 
       let testamonialsRefRes = await context.app.$storyapi.get(`cdn/stories/`, { starts_with: 'testamonials/', version: 'draft' })
+     
       context.store.commit('testamonials/setTestamonials', testamonialsRefRes.data.stories)
       context.store.commit('testamonials/setLoaded', '1')
     }
-    // Loading reference data once - Articles
+    // Loading reference data once - Nyheter
     if(context.store.state.articles.loaded !== '1') {
 
-      let articlesRefRes = await context.app.$storyapi.get(`cdn/stories/`, { starts_with: 'articles/', version: 'draft' })
+      let articlesRefRes = await context.app.$storyapi.get(`cdn/stories/`, { starts_with: 'nyheter/', version: 'draft' })
+     
       context.store.commit('articles/setArticles', articlesRefRes.data.stories)
       context.store.commit('articles/setLoaded', '1')
     }
