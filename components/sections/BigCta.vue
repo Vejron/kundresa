@@ -23,7 +23,7 @@
       </p>
       <nuxt-link
         class="inline-flex text-lg sm:text-2xl font-medium transition-colors duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-current focus:outline-none rounded-md text-purple-600 hover:text-purple-800"
-        :to="blok.url"
+        :to="blok.url.cached_url"
         >Läs mer -&gt;</nuxt-link
       >
 
@@ -34,7 +34,7 @@
           <testamonial-card
             v-for="testamonial in testamonials"
             :key="testamonial._uid"
-            class="transform-gpu rotate-2 -ml-4 sm:ml-10 mt-5 sm:mt-10 w-full md:max-w-xl"
+            class="z-10 transform-gpu rotate-2 -ml-4 sm:ml-10 mt-5 sm:mt-10 w-full sm:max-w-xl"
             :blok="testamonial.content"
           ></testamonial-card>
           <div

@@ -21,7 +21,7 @@
       </h2>
     </div>
 
-    <p class="p-6 leading-relaxed">
+    <p class="md:p-4 leading-relaxed">
       {{ articleContent.intro }}
     </p>
   </nuxt-link>
