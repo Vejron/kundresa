@@ -1,9 +1,9 @@
 <template>
   <nav class="block md:hidden bg-green-50 fixed bottom-0 w-full">
     <ul class="flex justify-around">
-      <li class="flex-grow py-6" v-for="link in links" :key="link.name" >
+      <nuxt-link class="flex-grow py-6" :to="link.url" v-for="link in links" :key="link.name" >
         <IconButton size="32" :icon="link.icon"><span class="font-light whitespace-nowrap text-sm">{{link.name}}</span></IconButton>
-      </li>
+      </nuxt-link>
     </ul>
   </nav>
 </template>
@@ -21,19 +21,19 @@ export default {
           url: "/",
         },
         {
-          name: "Logga in",
-          icon: mdiAccountOutline,
-          url: "/articles",
+          name: "Tjänster",
+          icon: mdiShoppingOutline,
+          url: "/products",
         },
         {
-          name: "Avtal",
-          icon: mdiShoppingOutline,
-          url: "/prices",
+          name: "Nyheter",
+          icon: mdiAccountOutline,
+          url: "/nyheter",
         },
         {
           name: "Kundservice",
           icon: mdiHomeOutline,
-          url: "/kundservice",
+          url: "/",
         },
       ]
     };

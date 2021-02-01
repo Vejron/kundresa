@@ -27,7 +27,7 @@
           }"
           :class="{
             'col-span-2': i === 3 || i === 6,
-            'gradient-cover bg-fixed': window.exists,
+            'gradient-cover md:bg-fixed': window.exists,
           }"
           class="shadow-md h-32 lg:h-46 rounded-md flex justify-center items-center text-white text-2xl lg:text-4xl font-extrabold"
         >
