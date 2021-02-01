@@ -9,7 +9,7 @@
       :height="size"
       viewBox="0 0 24 24"
     >
-      <path fill="rgba(0,0,0, 0.5)" :d="icon" />
+      <path fill="rgba(0,0,0, 0.51)" :d="icon" />
     </svg>
     <slot></slot>
   </a>
