@@ -10,7 +10,7 @@
         class="max-w-screen-lg text-lg sm:text-2xl sm:leading-10 font-medium mb-10 sm:mb-11"
       >
         Vi erbjuder helhetslösningar för alla dina behov inom
-        <span class="text-green-700 font-extrabold">el</span>,<!-- -->
+        <span class="text-green-700 font-extrabold">el</span>,
         <span class="text-green-700 font-extrabold">värme</span> och
         <span class="text-green-700 font-extrabold">bredband.</span>
         Med fokus på nöjda kunder och en smidig vardag. Alla våra tjänster är

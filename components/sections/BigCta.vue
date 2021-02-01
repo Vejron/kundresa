@@ -21,10 +21,10 @@
       >
         {{ blok.description }}
       </p>
-      <a
+      <nuxt-link
         class="inline-flex text-lg sm:text-2xl font-medium transition-colors duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-current focus:outline-none rounded-md text-purple-600 hover:text-purple-800"
         :to="blok.url"
-        >Läs mer -&gt;</a
+        >Läs mer -&gt;</nuxt-link
       >
 
       <div class="relative mt-10 rounded-lg bg-gray-200 h-80">
@@ -32,19 +32,21 @@
           class="absolute w-full h-full transform-gpu -rotate-2 rounded-lg bg-green-300"
         >
           <testamonial-card
-            v-for="testamonial in testamonials" :key="testamonial._uid"
+            v-for="testamonial in testamonials"
+            :key="testamonial._uid"
             class="transform-gpu rotate-2 -ml-4 sm:ml-10 mt-5 sm:mt-10 w-full md:max-w-xl"
             :blok="testamonial.content"
           ></testamonial-card>
-          <div v-if="blok.splashImage" class="absolute h-96 w-1/3 transform-gpu translate-y-32 md:translate-y-0 rotate-6 -top-3 right-0 rounded-lg">
-            
-              <img
-                :src="blok.splashImage.filename"
-                :alt="blok.splashImage.alt"
-                class="absolute max-w-none object-contain"
-                style="width: 100%; height: 100%; left: 0px; top: 0px"
-              />
-          
+          <div
+            v-if="blok.splashImage"
+            class="absolute h-96 w-1/3 transform-gpu translate-y-32 md:translate-y-0 rotate-6 -top-3 right-0 rounded-lg"
+          >
+            <img
+              :src="blok.splashImage.filename"
+              :alt="blok.splashImage.alt"
+              class="absolute max-w-none object-contain"
+              style="width: 100%; height: 100%; left: 0px; top: 0px"
+            />
           </div>
         </div>
       </div>
@@ -62,13 +64,15 @@ export default {
   },
   computed: {
     testamonials() {
-      if(!this.blok.testamonials) return [];
+      if (!this.blok.testamonials) return [];
       // Load reference data/content from store
-      const featuredTestamonials = this.$store.state.testamonials.testamonials.filter((testamonial) => {
-        return this.blok.testamonials.includes(testamonial.uuid)
-      })
-      return featuredTestamonials
-    }
-  }
+      const featuredTestamonials = this.$store.state.testamonials.testamonials.filter(
+        (testamonial) => {
+          return this.blok.testamonials.includes(testamonial.uuid);
+        }
+      );
+      return featuredTestamonials;
+    },
+  },
 };
 </script>
