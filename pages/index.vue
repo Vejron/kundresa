@@ -12,32 +12,6 @@
 <script>
 export default {
   transition: "slide-up",
-  data() {
-    return {
-      blok: {
-        _uid: "bd4cebcb-d42d-44fb-884e-d0028fa3e47c",
-        from: "Trogen kund, Grisbacka",
-        name: "Peter Appajärvi",
-        image: {
-          id: 1864006,
-          alt: "Peter med öl",
-          name: "",
-          focus: null,
-          title: "",
-          filename:
-            "https://a.storyblok.com/f/103186/400x300/3468351cac/peter.jpg",
-          copyright: "",
-          fieldtype: "asset",
-        },
-        citation:
-          '"Jag trodde aldrig att det skulle va så här kul att slippa frysa"',
-        component: "testamonial-card",
-        _editable:
-          '\u003c!--#storyblok#{"name": "testamonial-card", "space": "103186", "uid": "bd4cebcb-d42d-44fb-884e-d0028fa3e47c", "id": "35559365"}--\u003e',
-      },
-      story: { content: {} },
-    };
-  },
   mounted() {
     // Use the input event for instant update of content
     this.$storybridge.on("input", (event) => {
@@ -51,16 +25,6 @@ export default {
       this.$nuxt.$router.go({
         path: this.$nuxt.$router.currentRoute,
         force: true,
-      });
-    });
-
-    this.$OneSignal.push(() => {
-      this.$OneSignal.isPushNotificationsEnabled((isEnabled) => {
-        if (isEnabled) {
-          console.log("Push notifications are enabled!");
-        } else {
-          console.log("Push notifications are not enabled yet.");
-        }
       });
     });
   },

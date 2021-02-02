@@ -61,6 +61,9 @@ export default {
   pwa: {
     manifest: {
       lang: 'sv'
+    },
+    workbox: {
+      swURL: 'OneSignalSDKWorker.js'
     }
   },
 
