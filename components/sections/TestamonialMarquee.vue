@@ -32,12 +32,14 @@
 <script>
 export default {
   props: {
-    isPaused: false,
     blok: {
       type: Object,
       required: true,
     },
   },
+  data: () => ({
+    isPaused: false,
+  }),
   computed: {
     testamonials() {
       if (!this.blok.testamonials) return [];

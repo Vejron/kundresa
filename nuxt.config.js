@@ -19,7 +19,7 @@ export default {
   css: [
     '~/assets/global.css',
     '~/assets/ue-icons.css',
-    '@braid/vue-formulate/dist/snow.css'
+    //'@braid/vue-formulate/dist/snow.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -72,10 +72,10 @@ export default {
     //cdn: true,
     init: {
       appId: 'f145434d-d92a-44b3-8bd2-acc52b9d2ed0',
-      allowLocalhostAsSecureOrigin: true,
+      allowLocalhostAsSecureOrigin: false,
       welcomeNotification: {
           disable: false
-      }
+      },
     }
   },
 

@@ -42,8 +42,8 @@
         </div>
       </div>
       <a
-        href="#"
-        class="mb-6 w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-green-600 hover:bg-green-700"
+        @click="startOrder(avtal)"
+        class="cursor-pointer mb-6 w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-green-600 hover:bg-green-700"
       >
         {{ avtal.orderButtonText }}
       </a>
@@ -93,6 +93,17 @@ export default {
   computed: {
     priceMonth() {
       return this.avtal.priceKwh * (10000 / 12) + this.avtal.priceMonth;
+    },
+  },
+  methods: {
+    startOrder(avtal) {
+      console.log(avtal);
+      this.$router.push({
+        path: "/order",
+        query: {
+          data: JSON.stringify(avtal),
+        },
+      });
     },
   },
 };

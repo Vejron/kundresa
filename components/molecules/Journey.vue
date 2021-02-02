@@ -41,7 +41,7 @@ export default {
   },
   data: () => ({
     isOpen: false,
-    pnr: "",
+    pnr: "902 63",
   }),
   computed: {
     revealText() {

@@ -69,18 +69,6 @@ export default {
   opacity: 0;
 }
 
-.slide-up-enter-active,
-.slide-up-leave-active {
-  transform: translateY(0);
-  transition: 0.5s ease opacity, 0.5s ease transform;
-}
-
-.slide-up-enter,
-.slide-up-leave-to {
-  opacity: 0;
-  transform: translateY(10px);
-}
-
 .my-dialog .vts-dialog {
   background: rgba(0, 0, 0, 0.6);
 }
