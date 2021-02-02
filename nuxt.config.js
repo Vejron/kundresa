@@ -39,6 +39,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/pwa
+    '@nuxtjs/onesignal',
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
@@ -60,6 +61,18 @@ export default {
   pwa: {
     manifest: {
       lang: 'sv'
+    }
+  },
+
+  // Onesignal config https://github.com/nuxt-community/onesignal-module
+  oneSignal: {
+    //cdn: true,
+    init: {
+      appId: 'f145434d-d92a-44b3-8bd2-acc52b9d2ed0',
+      allowLocalhostAsSecureOrigin: true,
+      welcomeNotification: {
+          disable: false
+      }
     }
   },
 

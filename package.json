@@ -13,6 +13,7 @@
     "@braid/vue-formulate-i18n": "^1.14.0",
     "@marvr/storyblok-rich-text-vue-renderer": "^2.0.1",
     "@mdi/js": "^5.9.55",
+    "@nuxtjs/onesignal": "^3.0.0-beta.16",
     "@tailwindcss/typography": "^0.4.0",
     "@vue/composition-api": "^1.0.0-rc.1",
     "core-js": "^3.8.2",
