@@ -1,6 +1,6 @@
 <template>
   <div
-    class="card-wrapper flex flex-col rounded overflow-hidden shadow-lg transition-shadow duration-500 hover:shadow-2xl"
+    class="card-wrapper flex flex-col rounded-lg overflow-hidden shadow-lg transition-shadow duration-500 hover:shadow-2xl"
   >
     <div>
       <div>

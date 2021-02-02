@@ -21,7 +21,7 @@
     <collapse-transition>
       <ul
         v-if="isOpen"
-        class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+        class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-8"
       >
         <li><PriceCard /></li>
         <li><PriceCard /></li>
@@ -41,7 +41,7 @@ export default {
   },
   data: () => ({
     isOpen: false,
-    pnr: "903 64",
+    pnr: "",
   }),
   computed: {
     revealText() {
