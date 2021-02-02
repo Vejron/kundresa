@@ -4,5 +4,6 @@
     <Nuxt />
     <Footer />
     <BottomNav />
+    <Consent />
   </div>
 </template>

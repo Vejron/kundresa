@@ -12,6 +12,7 @@ import ArticleTeaser from '~/components/molecules/ArticleTeaser.vue'
 import FeaturedArticles from '~/components/sections/FeaturedArticles.vue'
 import Spacer from '~/components/atoms/Spacer.vue'
 import Journey from '~/components/molecules/Journey.vue'
+import TestamonialMarquee from '~/components/sections/TestamonialMarquee.vue'
 
 
 Vue.component('journey', Journey)
@@ -27,5 +28,6 @@ Vue.component('generic-article', GenericArticle)
 Vue.component('article-teaser', ArticleTeaser)
 Vue.component('featured-articles', FeaturedArticles)
 Vue.component('spacer', Spacer)
+Vue.component('testamonial-marquee', TestamonialMarquee)
 
 

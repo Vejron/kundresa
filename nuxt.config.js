@@ -26,7 +26,10 @@ export default {
   plugins: [
     '~/plugins/composition-api.js',
     '~/plugins/dynamic-components.js',
+    '~/plugins/vuetensils.client.js',
     '~/plugins/vue-formulate',
+    '~/plugins/gtag-plugin.client.js',
+    '~/plugins/crisp.client.js',
     '~/plugins/storyblok-rich-text-renderer.js',
   ],
 
