@@ -42,7 +42,7 @@
         </div>
       </div>
       <a
-        @click="startOrder(avtal)"
+        @click="select(avtal)"
         class="cursor-pointer mb-6 w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-xl text-white bg-green-600 hover:bg-green-700"
       >
         {{ avtal.orderButtonText }}
@@ -96,14 +96,8 @@ export default {
     },
   },
   methods: {
-    startOrder(avtal) {
-      console.log(avtal);
-      this.$router.push({
-        path: "/order",
-        query: {
-          data: JSON.stringify(avtal),
-        },
-      });
+    select(avtal) {
+      this.$emit('selected', avtal);
     },
   },
 };

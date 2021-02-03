@@ -19,7 +19,7 @@ export default {
   css: [
     '~/assets/global.css',
     '~/assets/ue-icons.css',
-    //'@braid/vue-formulate/dist/snow.css'
+    '~/assets/formulate-theme/snow.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -39,7 +39,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/onesignal',
+    //'@nuxtjs/onesignal',
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',

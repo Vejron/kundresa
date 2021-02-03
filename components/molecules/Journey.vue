@@ -23,9 +23,9 @@
         v-if="isOpen"
         class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-8"
       >
-        <li><PriceCard /></li>
-        <li><PriceCard /></li>
-        <li id="price"><PriceCard /></li>
+        <li><PriceCard @selected="onSelected($event)" /></li>
+        <li><PriceCard @selected="onSelected($event)" /></li>
+        <li id="price" ><PriceCard @selected="onSelected($event)" /></li>
       </ul>
     </collapse-transition>
   </section>
@@ -67,6 +67,14 @@ export default {
     },
   },
   methods: {
+    onSelected(avtal) {
+      this.$router.push({
+        path: "/order",
+        query: {
+          data: JSON.stringify(avtal),
+        },
+      });
+    },
     showOffers() {
       this.isOpen = !this.isOpen;
       setTimeout(() => {

@@ -43,3 +43,15 @@ html {
   opacity: 0;
   transform: translateX(30px);
 }
+
+.list-enter-active, .list-leave-active {
+  transition: all 0.5s;
+}
+.list-enter /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
+}
