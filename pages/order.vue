@@ -12,7 +12,11 @@
 
       <div>
         <h2 class="text-2xl font-black mb-6">Beställ avtal</h2>
-        <FormulateForm v-model="values" @submit="submitted">
+        <FormulateForm
+          v-model="values"
+          @submit="submitted"
+          #default="{ isLoading, hasErrors }"
+        >
           <div
             class="sm:rounded-lg shadow-lg bg-gradient-to-tr from-transparent to-gray-200 p-4 sm:p-8"
           >
@@ -50,7 +54,7 @@
             />
             <FormulateInput
               type="text"
-              name="post"
+              name="zip"
               label="Postnummer"
               validation="required"
             />
@@ -62,7 +66,7 @@
             />
           </div>
           <div
-            class="mt-8 sm:rounded-lg shadow-lg p-8 bg-gradient-to-tr from-transparent to-gray-200"
+            class="mt-8 sm:rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tr from-transparent to-gray-200"
           >
             <p class="text-green-600 text-lg font-semibold mb-6">
               Låt oss hjälpa dig att ta reda på Anläggnings-ID och Områdes-ID
@@ -73,7 +77,7 @@
               label="Jag ger Fake snake AB fullmakt att kontakta min nätägare och nuvarande elleverantör för att komplettera uppgifter om anläggnings-ID och områdes-ID samt säga upp mitt befintliga elavtal till det datum då det löper ut."
               validation="required"
             />
-            
+
             <FormulateInput
               type="radio"
               name="invoice"
@@ -91,7 +95,11 @@
               ]"
             />
             <div></div>
-            <FormulateInput type="submit" label="Slutför beställning" />
+            <FormulateInput
+              :disabled="isLoading || hasErrors"
+              type="submit"
+              :label="isLoading ? 'Bearbetar...' : 'Slutför beställning'"
+            />
           </div>
         </FormulateForm>
       </div>
@@ -106,7 +114,9 @@ export default {
     values: {},
   }),
   mounted() {
-    console.log(decodeURI(this.$route.query.data));
+    const json = decodeURI(this.$route.query.data);
+    this.values = JSON.parse(json);
+    console.log(json);
     const b = this.$refs.email.$el.getElementsByTagName("input");
     b[0].focus();
   },

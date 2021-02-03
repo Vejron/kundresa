@@ -97,7 +97,14 @@ export default {
   },
   methods: {
     select(avtal) {
-      this.$emit('selected', avtal);
+      const fakeCustomer = {
+        pnr: '19791106-8513',
+        name: 'Björn Yttergren',
+        address: 'Pastorsvägen 10',
+        zip: '903 62',
+        city: 'Umeå'
+      }
+      this.$emit('selected', fakeCustomer);
     },
   },
 };
