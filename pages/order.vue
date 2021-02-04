@@ -1,17 +1,20 @@
 <template>
-  <section class="max-w-5xl m-2 mx-auto mb-8 sm:px-6 md:px-8">
+  <section class="max-w-5xl mx-auto mb-8 sm:px-6 md:px-8">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div>
-        <h2 class="text-2xl font-black mb-6">Ditt valda avtal</h2>
+       
         <div
           class="sm:rounded-lg bg-gradient-to-tl from-transparent to-gray-200 shadow-lg p-4 sm:p-8"
         >
+          <h2 class="text-green-600 md:text-lg font-bold mb-2 uppercase">
+              Ditt valda avtal
+            </h2>
           <OrderPlan />
         </div>
       </div>
 
       <div>
-        <h2 class="text-2xl font-black mb-6">Beställ avtal</h2>
+       
         <FormulateForm
           v-model="values"
           @submit="submitted"
@@ -20,9 +23,9 @@
           <div
             class="sm:rounded-lg shadow-lg bg-gradient-to-tr from-transparent to-gray-200 p-4 sm:p-8"
           >
-            <p class="text-green-600 text-lg font-semibold mb-2">
+            <h2 class="text-green-600 md:text-lg font-bold mb-2 uppercase">
               Uppgifter för ditt nya elavtal
-            </p>
+            </h2>
             <p class="text-sm font-semibold text-gray-600 mb-4">
               Observera att det är samma person som står på elnätsavtalet som
               ska stå på elavtalet.
@@ -68,9 +71,9 @@
           <div
             class="mt-8 sm:rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tr from-transparent to-gray-200"
           >
-            <p class="text-green-600 text-lg font-semibold mb-6">
+            <h2 class="text-green-600 sm:text-lg font-bold mb-6 uppercase">
               Låt oss hjälpa dig att ta reda på Anläggnings-ID och Områdes-ID
-            </p>
+            </h2>
             <FormulateInput
               name="consent"
               type="checkbox"

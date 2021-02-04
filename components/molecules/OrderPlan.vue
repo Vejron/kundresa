@@ -61,12 +61,45 @@
     <!--div class="relative">
       <img src="/images/rorligt.jpg" alt="tease" />
     </div-->
+    <div class="flex justify-between border-t mt-6 py-2">
+      <div class="text-gray-600 text-sm">Detaljerad uträkning</div>
+      <button @click="details = !details" class="focus:outline-none focus:text-red-400">
+        <svg
+          class="transition-transform duration-300"
+          :class="{ 'transform rotate-180': details }"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          version="1.1"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+        >
+          <path fill="currentColor" :d="mdiChevronDown" />
+        </svg>
+      </button>
+    </div>
+    <collapse-transition>
+      <div v-show="details">
+        <div class="flex justify-between">
+          <span>Kilowattimepris</span>
+          <span>{{(costKwh * 100)}} öre/kWh</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Månadsavgift</span>
+          <span>{{fee}} Kr</span>
+        </div>
+      </div>
+    </collapse-transition>
   </div>
 </template>
 
 <script>
+import { mdiChevronDown } from "@mdi/js";
+
 export default {
   data: () => ({
+    details: false,
+    mdiChevronDown,
     usage: 20000,
     fee: 45,
     costKwh: 0.2535,
