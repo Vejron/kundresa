@@ -13,18 +13,24 @@
     </div>
 
     <div class="flex flex-col max-w-xs mx-auto">
-      <input
-        v-model="pnr"
-        type="text"
-        placeholder="Person eller postnr.."
-        class="min-w-0 mb-6 font-bold leading-5 px-4 py-3 text-gray-600 text-lg border-2 rounded-lg border-green-400 focus:outline-none focus:ring"
-      />
+      <div class="relative">
+        <input
+          v-model="pnr"
+          type="text"
+          placeholder="Person eller postnr.."
+          class="min-w-0 w-full mb-6 font-bold leading-5 px-4 py-3 text-gray-600 text-lg border-2 rounded-lg border-green-400 focus:outline-none focus:ring"
+        />
+        <div v-if="loading" class="absolute top-5 right-4">
+          <div class="dot-bricks"></div>
+        </div>
+      </div>
+
       <div class="h-12 relative flex justify-center">
         <transition name="slide-up">
           <button
             @click="showOffers"
             class="absolute px-4 py-3 leading-5 border-2 border-transparent text-base font-medium rounded-full text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring"
-            v-if="revealText"
+            v-if="showOffersButton"
           >
             {{ revealText }}
           </button>
@@ -65,8 +71,10 @@ export default {
     },
   },
   data: () => ({
+    loading: false,
     isOpen: false,
-    pnr: "903 44",
+    showOffersButton: false,
+    pnr: "",
     usage: 14000,
     fakeCustomer: {
       pnr: "19791106-8513",
@@ -95,16 +103,29 @@ export default {
     isValidPostNbr() {
       return /^\d{3} \d{2}$/.test(this.pnr);
     },
+    isAny() {
+      return this.isValidPnr || this.isValidPostNbr;
+    }
   },
   watch: {
-    pnr(value) {
-      console.log(
-        value,
-        /^(19|20)?(\d{6}([-+]|\s)\d{4}|(?!19|20)\d{10})$/.test(value)
-      );
+    isAny(value) {
+      console.log('is any', value);
+      if(value) {
+        this.getPerson();
+      } else {
+        this.showOffersButton  = this.isOpen = false;
+      }
     },
   },
   methods: {
+    getPerson() {
+      // fake async request
+      this.loading = true;
+      setTimeout(() => {
+        this.loading = false;
+        this.showOffersButton = true;
+      }, Math.random() * 600 + 400);
+    },
     onSelected(plan) {
       // push a route with the customer, plan and usage as a queryparam
       // we will read it later on the order route to prepopulate a form

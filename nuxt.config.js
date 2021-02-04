@@ -19,7 +19,8 @@ export default {
   css: [
     '~/assets/global.css',
     '~/assets/ue-icons.css',
-    '~/assets/formulate-theme/snow.scss'
+    '~/assets/formulate-theme/snow.scss',
+    '~/assets/dots/dots.scss',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

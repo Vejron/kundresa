@@ -1,6 +1,8 @@
 <template>
   <div class="relative w-full">
     <input
+      @focus="focused = true"
+      @blur="focused = false"
       type="range"
       :step="step"
       :min="min"
@@ -18,10 +20,10 @@
       <div
         class="absolute top-0 bottom-0 rounded-md bg-green-400"
         :style="'right: 0' + (1 - thumb) * 100 + '%; left:' + 0 + '%'"
-      >
-      </div>
+      ></div>
 
       <div
+        :class="{'border-2 border-red-400': focused}"
         class="absolute shadow w-6 h-6 top-0 left-0 bg-gray-300 rounded-full -mt-2 -ml-1"
         :style="thumbPosition"
       ></div>
@@ -33,10 +35,10 @@
 export default {
   props: {
     value: {
-      type: [Number, String]
+      type: [Number, String],
     },
     step: {
-      type: [Number, String]
+      type: [Number, String],
     },
     min: {
       type: [Number, String],
@@ -47,7 +49,9 @@ export default {
       default: 100,
     },
   },
-  mounted() {},
+  data: () => ({
+    focused: false,
+  }),
   computed: {
     thumb() {
       return this.value / (this.max - this.min);
