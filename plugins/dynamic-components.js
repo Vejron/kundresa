@@ -11,7 +11,7 @@ import GenericArticle from '~/components/sections/GenericArticle.vue'
 import ArticleTeaser from '~/components/molecules/ArticleTeaser.vue'
 import FeaturedArticles from '~/components/sections/FeaturedArticles.vue'
 import Spacer from '~/components/atoms/Spacer.vue'
-import Journey from '~/components/molecules/Journey.vue'
+import Journey from '~/components/sections/Journey.vue'
 import TestamonialMarquee from '~/components/sections/TestamonialMarquee.vue'
 
 
@@ -30,4 +30,31 @@ Vue.component('featured-articles', FeaturedArticles)
 Vue.component('spacer', Spacer)
 Vue.component('testamonial-marquee', TestamonialMarquee)
 
+export default (context, inject) => {
+  // Loading reference data once - Plans
+  if (context.store.state.deals.loaded !== '1') {
 
+    const plan1 = {
+      id: 1,
+      priceKwh: 0.4344,
+      fee: 45,
+      title: 'Rörligt elpris',
+      description: `Ett rörligt elpris baseras på det inköpspris som vi köper in elen för.
+    Priset varierar från månad till månad och skiljer sig åt beroende på var i
+    Sverige du bor. Passar dig som vill vara flexibel och följa elmarknadens
+    svängningar.`,
+      selectText: "Välj rörligt elpris",
+    };
+    const plan2 = {
+      id: 2,
+      priceKwh: 0.6344,
+      fee: 45,
+      title: 'Fast elpris',
+      description: `Väljer du elavtal med fast pris behöver du inte fundera över elmarknadens toppar och dalar och slipper prishöjning om elpriserna går upp. Fast elpris innebär att du har ett bundet elpris under hela avtalets längd, det passar därför bra för dig som vill ha bättre koll på vad elen kommer att kosta dig.`,
+      selectText: "Välj fast elpris",
+    };
+
+    context.store.commit('deals/setDeals', [plan1, plan2]);
+    context.store.commit('deals/setLoaded', '1');
+  }
+}

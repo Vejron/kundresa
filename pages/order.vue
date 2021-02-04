@@ -2,19 +2,17 @@
   <section class="max-w-5xl mx-auto mb-8 sm:px-6 md:px-8">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div>
-       
         <div
           class="sm:rounded-lg bg-gradient-to-tl from-transparent to-gray-200 shadow-lg p-4 sm:p-8"
         >
           <h2 class="text-green-600 md:text-lg font-bold mb-2 uppercase">
-              Ditt valda avtal
-            </h2>
-          <OrderPlan />
+            Ditt valda avtal
+          </h2>
+          <OrderPlan :plan="plan" :usage="usage" @change="usage = $event" />
         </div>
       </div>
 
       <div>
-       
         <FormulateForm
           v-model="values"
           @submit="submitted"
@@ -115,15 +113,22 @@ export default {
   layout: "simple",
   data: () => ({
     values: {},
+    plan: {},
+    usage: 0,
   }),
   mounted() {
     const json = decodeURI(this.$route.query.data);
     this.values = JSON.parse(json);
+    this.plan = this.getPlanById(this.values.planId);
+    this.usage = this.values.usage;
     console.log(json);
     const b = this.$refs.email.$el.getElementsByTagName("input");
     b[0].focus();
   },
   methods: {
+    getPlanById(id) {
+      return this.$store.state.deals.deals.find((plan) => plan.id == id);
+    },
     submitted() {},
   },
 };

@@ -6,8 +6,8 @@
       :min="min"
       :max="max"
       :value="value"
-      @input="$emit('input', $event.target.value)"
-      class="absolute z-10 h-2 w-full opacity-0 cursor-pointer"
+      @input="$emit('change', $event.target.value)"
+      class="absolute left-0 z-10 h-2 w-full opacity-0 cursor-pointer"
     />
 
     <div class="relative h-2 pointer-events-none">
