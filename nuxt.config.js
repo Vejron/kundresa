@@ -63,13 +63,13 @@ export default {
     manifest: {
       lang: 'sv'
     },
-    workbox: {
+    /*workbox: {
       swURL: 'OneSignalSDKWorker.js'
-    }
+    }*/
   },
 
   // Onesignal config https://github.com/nuxt-community/onesignal-module
-  oneSignal: {
+  /*oneSignal: {
     //cdn: true,
     init: {
       appId: 'f145434d-d92a-44b3-8bd2-acc52b9d2ed0',
@@ -78,7 +78,7 @@ export default {
           disable: false
       },
     }
-  },
+  },*/
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

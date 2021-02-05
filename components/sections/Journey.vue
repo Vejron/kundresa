@@ -9,7 +9,8 @@
       </h3>
       <div class="relative max-w-xs lg:mx-auto">
         <input
-          v-model="pnr"
+          :value="pnr"
+          @input="e => pnr = e.target.value"
           type="text"
           placeholder="Person eller postnr.."
           class="min-w-0 w-full mb-6 font-bold leading-5 px-4 py-3 text-gray-600 text-lg border-2 rounded-lg border-upink focus:outline-none focus:ring"
@@ -42,7 +43,7 @@
           <li
             v-for="plan in plans"
             :key="plan.id"
-            class="sm:rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tr from-white to-gray-200"
+            class="rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tr from-white to-gray-200"
           >
             <OrderPlan
               showSelect
@@ -55,7 +56,7 @@
         </ul>
       </collapse-transition>
     </div>
-    <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="8rem" width='100%' viewBox="0 0 1440 320">
+    <svg class="drop-shadow-below" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="8rem" width='100%' viewBox="0 0 1440 320">
       <path
         fill="#ffb300"
         fill-opacity="1"
@@ -141,7 +142,6 @@ export default {
       setTimeout(() => {
         this.loading = false;
         this.isOpen = true;
-
         setTimeout(() => {
           const cancelScroll = this.$scrollTo("#plans", 300, { offset: -200 });
         }, 300);
@@ -172,3 +172,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.drop-shadow-above {
+  filter: drop-shadow(0px -7px 3px rgba(0, 0, 0, 0.1));
+}
+.drop-shadow-below {
+  filter: drop-shadow(0px 10px 5px rgba(0, 0, 0, 0.2));
+}
+</style>
