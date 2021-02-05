@@ -222,8 +222,8 @@
 
 &[data-classification='button'] {
   button {
-    @include baseinput;
-    text-transform: uppercase;
+    @include baseinput;  
+    //text-transform: uppercase;
     border-color: $formulate-green;
     background-color: $formulate-green;
     color: white;

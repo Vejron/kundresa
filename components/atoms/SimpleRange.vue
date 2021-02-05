@@ -18,12 +18,12 @@
       ></div>
 
       <div
-        class="absolute top-0 bottom-0 rounded-md bg-green-400"
+        class="absolute top-0 bottom-0 rounded-md bg-primary-60"
         :style="'right: 0' + (1 - thumb) * 100 + '%; left:' + 0 + '%'"
       ></div>
 
       <div
-        :class="{'border-2 border-red-400': focused}"
+        :class="{'border-2 border-primary-60': focused}"
         class="absolute shadow w-6 h-6 top-0 left-0 bg-gray-300 rounded-full -mt-2 -ml-1"
         :style="thumbPosition"
       ></div>

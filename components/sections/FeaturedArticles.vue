@@ -2,7 +2,7 @@
   <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8" v-editable="blok">
     <div v-if="blok.title">
       <h2
-        class="sm:text-lg sm:leading-snug font-semibold tracking-wide uppercase text-green-600 mb-3"
+        class="sm:text-lg sm:leading-snug font-semibold tracking-wide uppercase text-primary mb-3"
       >
         {{ blok.title }}
       </h2>

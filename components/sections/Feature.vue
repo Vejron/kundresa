@@ -2,7 +2,7 @@
   <div v-editable="blok" class="flex">
     <div class="flex-shrink-0">
       <div
-        class="flex items-center justify-center h-14 w-14 rounded-xl text-green-600"
+        class="flex items-center justify-center h-14 w-14 rounded-xl text-primary"
       >
         <i :class="blok.icon + '-rnd-stroke'" class="leading-none text-5xl"></i>
       </div>

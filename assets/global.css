@@ -11,10 +11,15 @@ html {
 }
 
 /** default page transition **/
+.fade-enter-active,
+.fade-leave-active 
 .page-enter-active,
 .page-leave-active {
   transition: opacity 0.4s;
 }
+
+.fade-enter,
+.fade-leave-to 
 .page-enter,
 .page-leave-to {
   opacity: 0;

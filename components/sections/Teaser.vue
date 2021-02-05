@@ -22,7 +22,7 @@
               class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl"
             >
               <span class="block xl:inline">{{blok.headline}}</span>
-              <span class="block text-green-600 xl:inline"
+              <span class="block text-primary xl:inline"
                 >{{blok.subheading}}</span
               >
             </h1>
@@ -37,7 +37,7 @@
               <div class="rounded-md shadow">
                 <a
                   :href="blok.button1_url.url"
-                  class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 md:py-4 md:text-lg md:px-10"
+                  class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary-80 hover:bg-primary md:py-4 md:text-lg md:px-10"
                 >
                   {{blok.button1_text}}
                 </a>
@@ -45,7 +45,7 @@
               <div class="mt-3 sm:mt-0 sm:ml-3">
                 <a
                   :href="blok.button2_url.url"
-                  class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-green-700 bg-green-100 hover:bg-green-200 md:py-4 md:text-lg md:px-10"
+                  class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-primary bg-secondary-80 hover:bg-secondary md:py-4 md:text-lg md:px-10"
                 >
                    {{blok.button2_text}}
                 </a>

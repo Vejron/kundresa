@@ -4,9 +4,9 @@
     <p class="font-bold text-sm my-6">Hur stor är din elförbrukning?</p>
 
     <div class="flex justify-between">
-      <p class="italic font-black text-red-600 text-3xl mb-4">
+      <p class="italic font-black text-upink text-3xl mb-4">
         {{ usage }}
-        <span class="text-sm text-yellow-500">kWh / år</span>
+        <span class="text-sm text-primary">kWh / år</span>
       </p>
       <div class="relative">
         <transition name="list" mode="out-in">
@@ -54,9 +54,9 @@
       step="100"
     />
     <p class="font-bold text-sm my-6">Uppskattat månadspris:</p>
-    <p class="italic font-black text-red-600 text-3xl mb-4">
+    <p class="italic font-black text-upink text-3xl mb-4">
       {{ totalPerMonth }}
-      <span class="text-sm text-yellow-500">kr / mån</span>
+      <span class="text-sm text-primary">kr / mån</span>
     </p>
     <p class="text-xs text-gray-600">
       {{ plan.description }}
@@ -69,7 +69,7 @@
       <div class="text-gray-600 text-sm">Detaljerad uträkning</div>
       <button
         @click="details = !details"
-        class="focus:outline-none focus:text-red-400"
+        class="focus:outline-none focus:text-upink"
       >
         <svg
           class="transition-transform duration-300"
@@ -100,7 +100,7 @@
     <button
       v-if="showSelect"
       @click="select()"
-      class="w-full bottom-0 mt-6 px-4 py-3 leading-5 border-2 border-transparent text-base font-medium rounded-full text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring"
+      class="w-full bottom-0 mt-6 px-4 py-3 leading-6 text-base font-medium rounded-lg transition-colors duration-300 border-primary border-2 text-black  hover:bg-primary hover:text-white focus:outline-none focus:ring"
     >
       {{ plan.selectText }}
     </button>

@@ -5,7 +5,7 @@
         <div
           class="sm:rounded-lg bg-gradient-to-tl from-transparent to-gray-200 shadow-lg p-4 sm:p-8"
         >
-          <h2 class="text-green-600 md:text-lg font-bold mb-2 uppercase">
+          <h2 class="text-primary md:text-lg font-bold mb-2 uppercase">
             Ditt valda avtal
           </h2>
           <OrderPlan :plan="plan" :usage="usage" @change="usage = $event" />
@@ -21,7 +21,7 @@
           <div
             class="sm:rounded-lg shadow-lg bg-gradient-to-tr from-transparent to-gray-200 p-4 sm:p-8"
           >
-            <h2 class="text-green-600 md:text-lg font-bold mb-2 uppercase">
+            <h2 class="text-primary md:text-lg font-bold mb-2 uppercase">
               Uppgifter för ditt nya elavtal
             </h2>
             <p class="text-sm font-semibold text-gray-600 mb-4">

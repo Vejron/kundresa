@@ -7,7 +7,7 @@
         <i :class="blok.icon" class="leading-none text-5xl"></i>
       </div>
       <h2
-        class="sm:text-lg sm:leading-snug font-semibold tracking-wide uppercase text-purple-600 mb-3"
+        class="sm:text-lg sm:leading-snug font-semibold tracking-wide uppercase text-primary mb-3"
       >
         {{ blok.title }}
       </h2>
@@ -22,14 +22,14 @@
         {{ blok.description }}
       </p>
       <nuxt-link
-        class="inline-flex text-lg sm:text-2xl font-medium transition-colors duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-current focus:outline-none rounded-md text-purple-600 hover:text-purple-800"
+        class="inline-flex text-lg sm:text-2xl font-medium transition-colors duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-current focus:outline-none rounded-md text-upink hover:text-purple-800"
         :to="blok.url.cached_url"
         >Läs mer -&gt;</nuxt-link
       >
 
-      <div class="relative mt-10 rounded-lg bg-gray-200 h-80">
+      <div class="relative mt-10 rounded-lg bg-primary-20 h-80">
         <div
-          class="absolute w-full h-full transform-gpu -rotate-2 rounded-lg bg-green-300"
+          class="absolute w-full h-full transform-gpu -rotate-2 rounded-lg bg-secondary-20"
         >
           <testamonial-card
             v-for="testamonial in testamonials"
