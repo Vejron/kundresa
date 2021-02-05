@@ -1,13 +1,13 @@
 <template>
   <section class="">
-    <div class="text-center max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
+    <div class="lg:text-center max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
       <h2 class="text-lg text-primary font-semibold uppercase">Kundresan</h2>
       <h3
         class="mt-2 mb-5 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl"
       >
         Fixa elhandelsavtal på några klick
       </h3>
-      <div class="relative max-w-xs mx-auto">
+      <div class="relative max-w-xs lg:mx-auto">
         <input
           v-model="pnr"
           type="text"
