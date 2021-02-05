@@ -10,7 +10,7 @@
       <div class="relative max-w-xs lg:mx-auto">
         <input
           :value="pnr"
-          @input="e => pnr = e.target.value"
+          @input="(e) => (pnr = e.target.value)"
           type="text"
           placeholder="Person eller postnr.."
           class="min-w-0 w-full mb-6 font-bold leading-5 px-4 py-3 text-gray-600 text-lg border-2 rounded-lg border-upink focus:outline-none focus:ring"
@@ -21,12 +21,38 @@
           </div>
         </transition>
       </div>
-      <p class=" md:text-lg text-gray-500">
-        Fyll i lite personliga uppgifter så fixar vi resten
-      </p>
+      <transition name="fade">
+        <div
+          v-if="isOpen"
+          class="relative md:text-lg text-gray-500 lg:flex flex-col items-center"
+        >
+          Varsågod det här kan vi erbjuda dig
+          <svg
+            class="-bottom-10 text-upink animate-bounce absolute w-6 h-6 text-amber-900"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          </svg>
+         
+        </div>
+        <div v-else class="md:text-lg text-gray-500">
+          Fyll i lite personliga uppgifter så fixar vi resten
+        </div>
+      </transition>
     </div>
 
-    <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="8rem" width='100%' viewBox="0 0 1440 320">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="none"
+      height="8rem"
+      width="100%"
+      viewBox="0 0 1440 320"
+    >
       <path
         fill="#ffb300"
         fill-opacity="1"
@@ -56,7 +82,14 @@
         </ul>
       </collapse-transition>
     </div>
-    <svg class="drop-shadow-below" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" height="8rem" width='100%' viewBox="0 0 1440 320">
+    <svg
+      class="drop-shadow-below"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="none"
+      height="8rem"
+      width="100%"
+      viewBox="0 0 1440 320"
+    >
       <path
         fill="#ffb300"
         fill-opacity="1"

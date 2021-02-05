@@ -59,10 +59,10 @@
               >
             </li>
             <li>
-              <a
+              <nuxt-link
                 class="hover:text-red-500 transition-colors duration-200"
-                href="#"
-                >Jobba hos oss</a
+                to="mina-sidor"
+                >Jobba hos oss</nuxt-link
               >
             </li>
             <li>

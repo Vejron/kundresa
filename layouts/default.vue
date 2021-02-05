@@ -11,7 +11,7 @@
 <script>
 export default {
   mounted() {
-    if (process.env.NODE_ENV === "production") {
+    /*if (process.env.NODE_ENV === "production") {
       this.$OneSignal.push(() => {
         this.$OneSignal.showNativePrompt();
 
@@ -23,7 +23,7 @@ export default {
           }
         });
       });
-    }
+    }*/
   },
 };
 </script>

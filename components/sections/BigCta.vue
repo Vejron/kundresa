@@ -27,14 +27,14 @@
         >Läs mer -&gt;</nuxt-link
       >
 
-      <div class="relative mt-10 rounded-lg bg-primary-20 h-80">
+      <div class="relative mt-10 rounded-lg bg-gray-200 bg-opacity-80 h-80">
         <div
-          class="absolute w-full h-full transform-gpu -rotate-2 rounded-lg bg-secondary-20"
+          class="absolute w-full h-full transform-gpu -rotate-3 rounded-lg bg-upink-40"
         >
           <testamonial-card
             v-for="testamonial in testamonials"
             :key="testamonial._uid"
-            class="z-10 transform-gpu rotate-2 -ml-4 sm:ml-10 mt-5 sm:mt-10 w-full sm:max-w-xl"
+            class="z-10 transform-gpu rotate-3 -ml-4 sm:ml-10 mt-5 sm:mt-10 w-full sm:max-w-xl"
             :blok="testamonial.content"
           ></testamonial-card>
           <div
