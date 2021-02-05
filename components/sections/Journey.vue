@@ -1,5 +1,6 @@
 <template>
-  <section class="">
+  <section class="relative">
+    <div id="elbuy" class="absolute sr-only -top-32"></div>
     <div class="lg:text-center max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
       <h2 class="text-lg text-primary font-semibold uppercase">Kundresan</h2>
       <h3
@@ -64,12 +65,12 @@
         <ul
           id="plans"
           v-show="isOpen"
-          class="max-w-4xl mx-auto px-4 sm:px-6 md:px-8 w-full grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8"
+          class="max-w-4xl mx-auto pb-8 px-4 sm:px-6 md:px-8 w-full grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8"
         >
           <li
             v-for="plan in plans"
             :key="plan.id"
-            class="rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tr from-white to-gray-200"
+            class="rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tr from-primary-20 via-white to-white"
           >
             <OrderPlan
               showSelect
