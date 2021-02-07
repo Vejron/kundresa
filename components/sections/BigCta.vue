@@ -27,7 +27,7 @@
         >Läs mer -&gt;</nuxt-link
       >
 
-      <div class="relative mt-10 rounded-lg bg-gray-200 bg-opacity-80 h-80">
+      <div class="max-w-5xl relative mt-10 rounded-lg bg-gray-200 bg-opacity-80 h-80">
         <div
           class="absolute w-full h-full transform-gpu -rotate-3 rounded-lg bg-upink-40"
         >

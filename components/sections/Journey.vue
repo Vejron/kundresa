@@ -22,55 +22,44 @@
           </div>
         </transition>
       </div>
-      <transition name="fade">
-        <div
-          v-if="isOpen"
-          class="relative md:text-lg text-gray-500 lg:flex flex-col items-center"
-        >
-          Varsågod det här kan vi erbjuda dig
-          <svg
-            class="-bottom-10 text-upink animate-bounce absolute w-6 h-6 text-amber-900"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+      <client-only>
+        <transition name="fade">
+          <div
+            v-if="showOffers"
+            class="relative md:text-lg text-gray-500 lg:flex flex-col items-center"
           >
-            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-          </svg>
-         
-        </div>
-        <div v-else class="md:text-lg text-gray-500">
-          Fyll i lite personliga uppgifter så fixar vi resten
-        </div>
-      </transition>
+            Varsågod det här kan vi erbjuda dig
+            <svg
+              class="-bottom-10 text-upink animate-bounce absolute w-6 h-6 text-amber-900"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+          </div>
+          <div v-else class="md:text-lg text-gray-500">
+            Fyll i lite personliga uppgifter så fixar vi resten
+          </div>
+        </transition>
+      </client-only>
     </div>
 
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      preserveAspectRatio="none"
-      height="8rem"
-      width="100%"
-      viewBox="0 0 1440 320"
-    >
-      <path
-        fill="#ffb300"
-        fill-opacity="1"
-        d="M0,64L80,101.3C160,139,320,213,480,208C640,203,800,117,960,101.3C1120,85,1280,139,1360,165.3L1440,192L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
-      ></path>
-    </svg>
-    <div style="background: #ffb300">
+    <FancyWaves>
       <collapse-transition>
         <ul
           id="plans"
-          v-show="isOpen"
+          v-show="showOffers"
           class="max-w-4xl mx-auto pb-8 px-4 sm:px-6 md:px-8 w-full grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8"
         >
           <li
             v-for="plan in plans"
             :key="plan.id"
-            class="rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tr from-primary-20 via-white to-white"
+            :class="{'rotate-2 scale-105': plan.id == selectedPlanId}"
+            class="transform transition-transform rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tl from-gray-200 via-white to-white"
           >
             <OrderPlan
               showSelect
@@ -82,39 +71,124 @@
           </li>
         </ul>
       </collapse-transition>
-    </div>
-    <svg
-      class="drop-shadow-below"
-      xmlns="http://www.w3.org/2000/svg"
-      preserveAspectRatio="none"
-      height="8rem"
-      width="100%"
-      viewBox="0 0 1440 320"
-    >
-      <path
-        fill="#ffb300"
-        fill-opacity="1"
-        d="M0,64L80,101.3C160,139,320,213,480,208C640,203,800,117,960,101.3C1120,85,1280,139,1360,165.3L1440,192L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"
-      ></path>
-    </svg>
-
-    <div class="flex flex-col">
-      <!--div class="h-12 relative flex justify-center">
-        <transition name="slide-up">
-          <button
-            @click="showOffers"
-            class="w-full absolute px-4 py-3 leading-5 border-2 border-transparent text-base font-medium rounded-lg text-white bg-upink hover:bg-primary-80 focus:outline-none focus:ring"
-            v-if="showOffersButton"
+      <collapse-transition>
+        <div
+          v-show="showSignupForm"
+          class="max-w-4xl mx-auto pb-8 px-4 sm:px-6 md:px-8"
+        >
+          <FormulateForm
+            v-model="formData"
+            @submit="submitted"
+            #default="{ isLoading, hasErrors }"
           >
-            {{ revealText }}
-          </button>
-        </transition>
-      </div-->
-    </div>
+            <div
+              id="personal"
+              class="sm:rounded-lg shadow-lg bg-gradient-to-tl from-gray-200 via-white to-white p-4 sm:p-8"
+            >
+              <h2 class="text-primary md:text-lg font-bold mb-2 uppercase">
+                Uppgifter för ditt nya elavtal
+              </h2>
+              <p class="text-sm font-semibold text-gray-600 mb-4">
+                Observera att det är samma person som står på elnätsavtalet som
+                ska stå på elavtalet.
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-y-0 md:gap-x-8">
+                <FormulateInput
+                  ref="email"
+                  type="email"
+                  name="mail"
+                  label="E-post"
+                  validation="required|email"
+                />
+                <FormulateInput
+                  type="tel"
+                  name="tel"
+                  label="Telefon"
+                  validation="required"
+                />
+
+                <FormulateInput
+                  type="text"
+                  name="name"
+                  label="Förnamn"
+                  validation="required"
+                />
+                <FormulateInput
+                  type="text"
+                  name="surname"
+                  label="Efternamn"
+                  validation="required"
+                />
+              </div>
+              <div class="mt-6 md:mt-0 md:flex">
+                <FormulateInput
+                  class="md:mr-8"
+                  type="text"
+                  name="address"
+                  label="Adress"
+                  validation="required"
+                />
+                <FormulateInput
+                  class="md:mr-8"
+                  type="text"
+                  name="zip"
+                  label="Postnummer"
+                  validation="required"
+                />
+                <FormulateInput
+                  type="text"
+                  name="city"
+                  label="Ort"
+                  validation="required"
+                />
+              </div>
+            </div>
+            <div
+              class="mt-8 sm:rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tl from-gray-200 via-white to-white"
+            >
+              <h2 class="text-primary sm:text-lg font-bold mb-6 uppercase">
+                Låt oss hjälpa dig att ta reda på Anläggnings-ID och Områdes-ID
+              </h2>
+              <FormulateInput
+                name="consent"
+                type="checkbox"
+                label="Jag ger Fake snake AB fullmakt att kontakta min nätägare och nuvarande elleverantör för att komplettera uppgifter om anläggnings-ID och områdes-ID samt säga upp mitt befintliga elavtal till det datum då det löper ut."
+                validation="required"
+              />
+
+              <FormulateInput
+                type="radio"
+                name="invoice"
+                label="Skicka fakturan via:"
+                help="För snabbast handläggning välj e-post"
+                :options="[
+                  {
+                    value: 'email',
+                    label: 'E-post',
+                    id: 'my-first',
+                    disabled: false,
+                  }, // this checkbox is disabled
+                  { value: 'sms', label: 'SMS' },
+                  { value: 'post', label: 'Post' },
+                ]"
+              />
+              <div></div>
+              <FormulateInput
+                :disabled="isLoading || hasErrors"
+                type="submit"
+                :label="isLoading ? 'Bearbetar...' : 'Slutför beställning'"
+              />
+            </div>
+          </FormulateForm>
+        </div>
+      </collapse-transition>
+    </FancyWaves>
   </section>
 </template>
 
 <script>
+import debounce from "lodash/debounce";
+
 export default {
   props: {
     blok: {
@@ -124,10 +198,12 @@ export default {
   },
   data: () => ({
     loading: false,
-    isOpen: false,
-    showOffersButton: false,
+    showOffers: false,
+    showSignupForm: false,
+    selectedPlanId: null,
     pnr: "",
     usage: 14000,
+
     fakeCustomer: {
       pnr: "19791106-8513",
       name: "Björn Yttergren",
@@ -137,6 +213,7 @@ export default {
       planId: 1,
       usage: 0,
     },
+    formData: {},
   }),
   computed: {
     plans() {
@@ -160,28 +237,58 @@ export default {
     },
   },
   watch: {
+    formData() {
+      this.saveProgress();
+    },
     isAny(value) {
-      console.log("is any", value);
       if (value) {
         this.getPerson();
       } else {
-        this.isOpen = false;
+        this.showOffers = false;
+        this.showSignupForm = false;
+        this.saveProgress();
       }
     },
   },
+
+  mounted() {
+    const savedState = JSON.parse(localStorage.getItem("state"));
+    if (savedState && savedState.formData) {
+      // hydrate form data and journey state
+      this.formData = savedState.formData;
+      this.loading = savedState.loading;
+      this.showOffers = savedState.showOffers;
+      this.showSignupForm = savedState.showSignupForm;
+      this.selectedPlanId = savedState.selectedPlanId;
+      this.pnr = savedState.pnr;
+      this.usage = savedState.usage;
+    }
+  },
   methods: {
+    submitted(data) {
+      // reset saved state after compleated signup
+      localStorage.removeItem("state");
+    },
     getPerson() {
       // fake async request
       this.loading = true;
       setTimeout(() => {
         this.loading = false;
-        this.isOpen = true;
+        this.showOffers = true;
+        this.saveProgress();
         setTimeout(() => {
           const cancelScroll = this.$scrollTo("#plans", 300, { offset: -200 });
         }, 300);
       }, Math.random() * 600 + 400);
     },
     onSelected(plan) {
+      this.selectedPlanId = plan.id;
+      this.showSignupForm = true;
+      setTimeout(() => {
+          const cancelScroll = this.$scrollTo("#personal", 300, { offset: -200 });
+        }, 300);
+      this.saveProgress();
+      return;
       // push a route with the customer, plan and usage as a queryparam
       // we will read it later on the order route to prepopulate a form
       this.$router.push({
@@ -195,23 +302,29 @@ export default {
         },
       });
     },
-    showOffers() {
-      this.isOpen = !this.isOpen;
-      if (this.isOpen) {
+    saveProgress: debounce(function (e) {
+      return;
+      const state = {
+        formData: this.formData,
+        loading: this.loading,
+        showOffers: this.showOffers,
+        showSignupForm: this.showSignupForm,
+        selectedPlanId: this.selectedPlanId,
+        pnr: this.pnr,
+        usage: this.usage,
+      };
+      console.log("progress saved", state);
+      localStorage.setItem("state", JSON.stringify(state));
+    }, 500),
+    
+    /*showOffers() {
+      this.showOffers = !this.showOffers;
+      if (this.showOffers) {
         setTimeout(() => {
           const cancelScroll = this.$scrollTo("#plans", 300, { offset: -65 });
         }, 300);
       }
-    },
+    },*/
   },
 };
 </script>
-
-<style scoped>
-.drop-shadow-above {
-  filter: drop-shadow(0px -7px 3px rgba(0, 0, 0, 0.1));
-}
-.drop-shadow-below {
-  filter: drop-shadow(0px 10px 5px rgba(0, 0, 0, 0.2));
-}
-</style>

@@ -33,7 +33,7 @@ export default {
         {
           name: "Kundservice",
           icon: mdiHomeOutline,
-          url: "/",
+          url: "/kundservice",
         },
       ]
     };
@@ -50,5 +50,10 @@ export default {
 <style scoped>
 nav {
   box-shadow: 0 8px 15px 8px rgb(0 0 0 / 50%);
+}
+@media (max-height: 500px) {
+    nav {
+      display: none;
+    }
 }
 </style>
