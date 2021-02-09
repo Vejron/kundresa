@@ -58,7 +58,7 @@
           <li
             v-for="plan in plans"
             :key="plan.id"
-            :class="{'rotate-2 scale-105': plan.id == selectedPlanId}"
+            :class="{ 'rotate-2 scale-105': plan.id == selectedPlanId }"
             class="transform transition-transform rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tl from-gray-200 via-white to-white"
           >
             <OrderPlan
@@ -252,6 +252,13 @@ export default {
   },
 
   mounted() {
+    /*
+    const channel = this.$pusher.subscribe('prices');
+    channel.bind('price-event', function(data) {
+      console.log(JSON.stringify(data));
+    });
+    */
+
     const savedState = JSON.parse(localStorage.getItem("state"));
     if (savedState && savedState.formData) {
       // hydrate form data and journey state
@@ -285,8 +292,8 @@ export default {
       this.selectedPlanId = plan.id;
       this.showSignupForm = true;
       setTimeout(() => {
-          const cancelScroll = this.$scrollTo("#personal", 300, { offset: -200 });
-        }, 300);
+        const cancelScroll = this.$scrollTo("#personal", 300, { offset: -200 });
+      }, 300);
       this.saveProgress();
       return;
       // push a route with the customer, plan and usage as a queryparam
@@ -316,7 +323,7 @@ export default {
       console.log("progress saved", state);
       localStorage.setItem("state", JSON.stringify(state));
     }, 500),
-    
+
     /*showOffers() {
       this.showOffers = !this.showOffers;
       if (this.showOffers) {

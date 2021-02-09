@@ -13,6 +13,10 @@ import FeaturedArticles from '~/components/sections/FeaturedArticles.vue'
 import Spacer from '~/components/atoms/Spacer.vue'
 import Journey from '~/components/sections/Journey.vue'
 import TestamonialMarquee from '~/components/sections/TestamonialMarquee.vue'
+import DynamicForm from '~/components/molecules/DynamicForm.vue'
+import InputField from '~/components/atoms/InputField.vue'
+import ResponsiveGrid from '~/components/layout/ResponsiveGrid.vue'
+
 
 
 Vue.component('journey', Journey)
@@ -29,6 +33,9 @@ Vue.component('article-teaser', ArticleTeaser)
 Vue.component('featured-articles', FeaturedArticles)
 Vue.component('spacer', Spacer)
 Vue.component('testamonial-marquee', TestamonialMarquee)
+Vue.component('dynamic-form', DynamicForm)
+Vue.component('input-field', InputField)
+Vue.component('responsive-grid', ResponsiveGrid)
 
 export default (context, inject) => {
   // Loading reference data once - Plans

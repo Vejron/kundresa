@@ -32,6 +32,7 @@ export default {
     '~/plugins/gtag-plugin.client.js',
     '~/plugins/crisp.client.js',
     '~/plugins/storyblok-rich-text-renderer.js',
+    //'~/plugins/pusher.client.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
