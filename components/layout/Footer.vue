@@ -61,7 +61,7 @@
             <li>
               <nuxt-link
                 class="hover:text-red-500 transition-colors duration-200"
-                to="mina-sidor"
+                to="/"
                 >Jobba hos oss</nuxt-link
               >
             </li>
