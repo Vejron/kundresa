@@ -188,6 +188,7 @@
 
 <script>
 import debounce from "lodash/debounce";
+import { info } from "@/services/person.service"
 
 export default {
   props: {
@@ -241,8 +242,8 @@ export default {
       this.saveProgress();
     },
     isAny(value) {
-      if (value) {
-        this.getPerson();
+      if (this.isValidPnr) {
+        this.getPerson(value);
       } else {
         this.showOffers = false;
         this.showSignupForm = false;
@@ -276,17 +277,30 @@ export default {
       // reset saved state after compleated signup
       localStorage.removeItem("state");
     },
-    getPerson() {
+    getPerson(pnr) {
       // fake async request
       this.loading = true;
-      setTimeout(() => {
+      info(pnr).then((res) => res.json()).then((data) => {
+        console.info('peronal stuff', data);
+        this.setInitialForm(data);
         this.loading = false;
         this.showOffers = true;
         this.saveProgress();
         setTimeout(() => {
           const cancelScroll = this.$scrollTo("#plans", 300, { offset: -200 });
         }, 300);
-      }, Math.random() * 600 + 400);
+      }).catch(e => {
+        console.warn('failed to get peronal stuff');
+      });
+    },
+    setInitialForm(data) {
+      this.formData = {
+        name: data.first_name,
+        surname: data.last_name,
+        address: data.address,
+        zip: data.zip_code,
+        city: data.city
+      }
     },
     onSelected(plan) {
       this.selectedPlanId = plan.id;
