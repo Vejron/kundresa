@@ -9,7 +9,7 @@
           class="system-bar text-xs flex justify-between items-center px-4 h-10"
         >
           <div class="flex items-center divide-x divide-gray-300">
-            <nuxt-link to="/" class="pr-2">Privat</nuxt-link>
+            <a href="https://focused-morse-35e7c8.netlify.app/login" class="pr-2">Mina sidor</a>
             <nuxt-link to="/" class="pl-2">Företag</nuxt-link>
           </div>
           <div>
