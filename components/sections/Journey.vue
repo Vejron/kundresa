@@ -243,7 +243,7 @@ export default {
     },
     isAny(value) {
       if (this.isValidPnr) {
-        this.getPerson(value);
+        this.getPerson(this.pnr);
       } else {
         this.showOffers = false;
         this.showSignupForm = false;
