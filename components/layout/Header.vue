@@ -13,7 +13,7 @@
             <nuxt-link to="/" class="pl-2">Företag</nuxt-link>
           </div>
           <div>
-            <a href="https://driftinfo10.surge.sh/history">Driftstatus</a>
+            <a href="https://drift.villmindre.com">Driftstatus</a>
           </div>
         </div>
       </div>
