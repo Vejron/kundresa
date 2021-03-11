@@ -16,25 +16,23 @@
     "@nuxtjs/onesignal": "^3.0.0-beta.16",
     "@tailwindcss/typography": "^0.4.0",
     "@vue/composition-api": "^1.0.0-rc.1",
-    "@xstate/vue": "^0.4.0",
     "core-js": "^3.8.2",
-    "nuxt": "^2.14.12",
+    "nuxt": "^2.15.3",
     "nuxt-animejs": "^1.2.1",
     "pusher-js": "^7.0.3",
     "storyblok-nuxt": "^1.3.0",
     "vue-gtag": "^1.10.0",
     "vue-scrollto": "^2.20.0",
-    "vuetensils": "^0.7.8",
-    "xstate": "^4.16.1"
+    "vuetensils": "^0.7.8"
   },
   "devDependencies": {
     "@nuxtjs/pwa": "^3.3.5",
-    "@nuxtjs/tailwindcss": "^3.4.2",
-    "autoprefixer": "^9",
+    "@nuxtjs/tailwindcss": "4.0.0-0",
+    "autoprefixer": "^10.2.5",
     "node-sass": "^5.0.0",
-    "postcss": "^7",
+    "postcss": "^8.2.8",
     "sass-loader": "^10.1.1",
     "sparkpost": "^2.1.4",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
+    "tailwindcss": "^2.0.3"
   }
 }

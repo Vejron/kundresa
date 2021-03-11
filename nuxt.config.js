@@ -36,7 +36,13 @@ export default {
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: [
+    '~/components/dialogs',
+    '~/components/atoms',
+    '~/components/molecules',
+    '~/components/layout',
+    '~/components/sections',
+  ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
