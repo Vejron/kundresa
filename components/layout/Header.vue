@@ -69,8 +69,8 @@ export default {
           url: "/nyheter",
         },
         {
-          name: "Produkter",
-          url: "/products",
+          name: "Om oss",
+          url: "/om-oss",
         },
         {
           name: "Kundservice",
@@ -170,13 +170,15 @@ export default {
   border-bottom-color: transparent;
   border-bottom-style: solid;
   border-bottom-width: 2.5px;
-  transition: border-bottom-color, font-weight 0.3s;
+  transition: all 0.3s;
 }
 .top-link.logo--text {
   font-weight: 600;
 }
-.top-link:hover {
-  border-bottom-color: black;
+.top-link:hover,
+.top-link.nuxt-link-active {
+  
+  @apply border-primary;
   font-weight: 600;
 }
 </style>

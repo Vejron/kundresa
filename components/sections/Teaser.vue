@@ -80,46 +80,4 @@ export default {
 
 <style scoped>
 
-.waves {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 20vw;
-  transition: 500ms;
-}
-
-.waves::before,
-.waves::after {
-  content: "";
-  position: absolute;
-  width: 300vw;
-  height: 300vw;
-  top: -65vw;
-  left: 50%;
-  will-change: transform;
-  transform: translate(-50%, -75%);
-}
-
-.waves::before {
-  border-radius: 44%;
-  background: rgba(255, 240, 25);
-  animation: waves 32s linear infinite;
-}
-
-.waves::after {
-  border-radius: 44%;
-  background: rgba(7, 139, 14, 0.7);
-  animation: waves 60s linear infinite;
-}
-
-@keyframes waves {
-  0% {
-    transform: translate(-50%, -75%) rotate(0deg);
-  }
-
-  100% {
-    transform: translate(-50%, -75%) rotate(360deg);
-  }
-}
 </style>
