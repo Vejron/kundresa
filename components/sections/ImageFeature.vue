@@ -1,5 +1,5 @@
 <template>
-  <div v-editable="blok" class="flex flex-col-reverse md:flex-row max-w-xl md:max-w-7xl mx-auto">
+  <div v-editable="blok" :class="{'md:flex-row-reverse': blok.left}" class="flex flex-col-reverse md:flex-row max-w-xl md:max-w-7xl mx-auto">
     <div class="hidden md:block relative h-96 w-1/2">
       <story-image class="object-cover h-96 inset-y-0 w-full" :image="blok.image" />
       <svg
@@ -8,6 +8,7 @@
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
         aria-hidden="true"
+        :class="{'right-full': blok.left}"
         class="hidden md:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
       >
         <polygon data-v-ebdc76f4="" points="50,0 100,0 50,100 0,100"></polygon>
