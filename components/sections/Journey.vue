@@ -192,7 +192,7 @@ import { info } from "@/services/person.service"
 
 export default {
   props: {
-    blok: {
+    body: {
       type: Object,
       required: true,
     },

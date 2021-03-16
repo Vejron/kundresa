@@ -13,7 +13,7 @@
       :key="testamonial._uid"
     >
       <testamonial-card
-        :blok="testamonial.content"
+        :body="testamonial.content"
         class="transform-gpu rotate-3"
         :class="{ '-rotate-3': index % 2 }"
       ></testamonial-card>
@@ -24,7 +24,7 @@
 <script>
 export default {
   props: {
-    blok: {
+    body: {
       type: Object,
       required: true,
     },
@@ -34,11 +34,11 @@ export default {
   }),
   computed: {
     testamonials() {
-      if (!this.blok.testamonials) return [];
+      if (!this.body.testamonials) return [];
       // Load reference data/content from store
       const featuredTestamonials = this.$store.state.testamonials.testamonials.filter(
         (testamonial) => {
-          return this.blok.testamonials.includes(testamonial.uuid);
+          return this.body.testamonials.includes(testamonial.uuid);
         }
       );
       return featuredTestamonials;

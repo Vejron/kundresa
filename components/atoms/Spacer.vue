@@ -6,7 +6,7 @@
 export default {
   props: {
     props: {
-      blok: {
+      body: {
         type: Object,
         required: true,
       },

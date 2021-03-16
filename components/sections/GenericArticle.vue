@@ -1,27 +1,27 @@
 <template>
   <div
-    v-editable="blok"
+    v-editable="body"
     class="prose prose-sm sm:prose lg:prose-lg mb-24 px-4 mx-auto"
   >
-    <h1>{{ blok.name }}</h1>
+    <h1>{{ body.name }}</h1>
     <img :src="image" width="1000" height="550" />
 
-    <p class="lead">{{ blok.intro }}</p>
-    <rich-text-renderer :document="blok.body" />
+    <p class="lead">{{ body.intro }}</p>
+    <rich-text-renderer :document="body.body" />
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    blok: {
+    body: {
       type: Object,
       required: true,
     },
   },
   computed: {
     image() {
-      return this.blok?.image?.filename;
+      return this.body?.image?.filename;
     },
   },
 };

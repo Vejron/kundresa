@@ -1,44 +1,44 @@
 <template>
-  <div v-editable="blok">
+  <div v-editable="body">
     <FormulateForm
       class="p-4 w-full max-w-screen-md mx-auto"
       @submit="submitHandler"
       #default="{ isLoading, hasErrors }"
     >
-      <h2 class="text-2xl md:text-4xl font-bold mb-8">{{blok.title}}</h2>
+      <h2 class="text-2xl md:text-4xl font-bold mb-8">{{body.title}}</h2>
       <div class="prose prose-sm sm:prose lg:prose-lg mb-8">
-         <rich-text-renderer :document="blok.description" />
+         <rich-text-renderer :document="body.description" />
       </div>
      
-      <template v-for="blok in blok.inputs">
-        <template v-if="blok.component === 'input-field'">
+      <template v-for="body in body.inputs">
+        <template v-if="body.component === 'input-field'">
           <FormulateInput
-            :key="blok._uid"
+            :key="body._uid"
             class=""
-            :type="blok.type"
-            :name="blok.name"
-            :placeholder="blok.placeholder"
-            :label="blok.label"
-            :validation="blok.validators"
-            :help="blok.help"
+            :type="body.type"
+            :name="body.name"
+            :placeholder="body.placeholder"
+            :label="body.label"
+            :validation="body.validators"
+            :help="body.help"
             error-behavior="blur"
           />
         </template>
-        <template v-else-if="blok.component === 'responsive-grid'">
-          <responsive-grid :blok="blok" :key="blok._uid"> </responsive-grid>
+        <template v-else-if="body.component === 'responsive-grid'">
+          <responsive-grid :body="body" :key="body._uid"> </responsive-grid>
         </template>
       </template>
       <div class="flex justify-end">
         <FormulateInput
           type="submit"
           :disabled="isLoading || hasErrors"
-          :label="isLoading ? 'skickar...' : blok.submitButtonText"
+          :label="isLoading ? 'skickar...' : body.submitButtonText"
         />
       </div>
     </FormulateForm>
     <client-only>
     <VDialog v-model="dialog" bg-transition="fade" class="my-dialog">
-      <p class="mb-4">{{blok.thankyou}}</p>
+      <p class="mb-4">{{body.thankyou}}</p>
       
     </VDialog>
     </client-only>
@@ -48,7 +48,7 @@
 <script>
 export default {
   props: {
-    blok: {
+    body: {
       type: Object,
       required: true,
     },
@@ -60,7 +60,7 @@ export default {
     async submitHandler(data) {
       this.dialog = true;
       console.log("form data: ", data);
-      await fetch(this.blok.endpoint, {
+      await fetch(this.body.endpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

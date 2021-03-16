@@ -4,7 +4,7 @@
       <h1
         class="text-4xl sm:text-5xl lg:text-6xl leading-none font-extrabold tracking-tight text-gray-900 mb-8 sm:mb-10"
       >
-        {{ blok.title }}
+        {{ body.title }}
       </h1>
       <p
         class="max-w-screen-lg text-lg sm:text-2xl sm:leading-10 font-medium mb-10 sm:mb-11"
@@ -22,7 +22,7 @@
           v-for="(window, i) in windows"
           :key="i"
           :style="{
-            'background-image': 'url(' + blok.image.filename + ')',
+            'background-image': 'url(' + body.image.filename + ')',
             'transform': 'rotate3D(0, 0, 1,' + (Math.random() - 0.5) * 6 + 'deg)',
           }"
           :class="{
@@ -47,7 +47,7 @@
 <script>
 export default {
   props: {
-    blok: {
+    body: {
       type: Object,
       required: true,
     },

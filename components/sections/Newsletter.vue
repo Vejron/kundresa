@@ -1,11 +1,11 @@
 <template>
   <div class="max-w-7xl mx-auto my-12 px-4 sm:px-6 lg:px-8">
-    <div v-editable="blok" class="relative rounded-lg py-6 overflow-hidden">
+    <div v-editable="body" class="relative rounded-lg py-6 overflow-hidden">
       <h2 class="text-2xl font-semibold font-display text-gray-900 sm:text-3xl">
-        {{ blok.title }}
+        {{ body.title }}
       </h2>
       <p class="mt-2 max-w-xl text-base text-gray-500">
-        {{ blok.description }}
+        {{ body.description }}
       </p>
       <form class="mt-6" @submit.prevent="submit($event)">
         <div class="sm:flex">
@@ -68,7 +68,7 @@
 <script>
 export default {
   props: {
-    blok: {
+    body: {
       type: Object,
       required: true,
     },

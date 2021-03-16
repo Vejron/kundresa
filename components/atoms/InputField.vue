@@ -1,12 +1,12 @@
 <template>
   <FormulateInput
-    :class="blok.class"
-    :type="blok.type"
-    :name="blok.name"
-    :placeholder="blok.placeholder"
-    :label="blok.label"
-    :validation="blok.validators"
-    :help="blok.help"
+    :class="body.class"
+    :type="body.type"
+    :name="body.name"
+    :placeholder="body.placeholder"
+    :label="body.label"
+    :validation="body.validators"
+    :help="body.help"
     error-behavior="blur"
   />
 </template>
@@ -15,7 +15,7 @@
 export default {
   //inheritAttrs: false // optional
   props: {
-    blok: {
+    body: {
       type: Object,
       required: true,
     },

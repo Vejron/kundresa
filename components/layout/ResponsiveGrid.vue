@@ -1,12 +1,12 @@
 <template>
   <div
-    v-editable="blok"
-    :class="blok.class">
+    v-editable="body"
+    :class="body.class">
     <div
-      :key="blok._uid"
-      v-for="blok in blok.columns"
+      :key="body._uid"
+      v-for="body in body.columns"
       class="">
-      <component :blok="blok" :is="blok.component" />
+      <component :body="body" :is="body.component" />
     </div>
   </div>
 </template>
@@ -14,7 +14,7 @@
 <script>
 export default {
   props: {
-    blok: {
+    body: {
       type: Object,
       required: true
     }
