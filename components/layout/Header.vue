@@ -26,9 +26,9 @@
             <span class="top-link font-medium ml-2">Fake snake AB</span>
           </nuxt-link>
           <ul class="hidden md:flex items-center">
-            <li class="px-4" v-for="link in topLinks" :key="link.name">
+            <li class="px-4 flex-grow-0 flex-shrink-0" v-for="link in topLinks" :key="link.name">
               <nuxt-link
-                class="top-link pb-1 whitespace-no-wrap"
+                class="top-link pb-1 whitespace-nowrap"
                 :to="link.url"
                 >{{ link.name }}</nuxt-link
               >
@@ -166,19 +166,25 @@ export default {
   position: static;
 }
 
-.top-link {
-  border-bottom-color: transparent;
-  border-bottom-style: solid;
-  border-bottom-width: 2.5px;
-  transition: all 0.3s;
-}
-.top-link.logo--text {
-  font-weight: 600;
-}
 .top-link:hover,
 .top-link.nuxt-link-active {
   
   @apply border-primary;
   font-weight: 600;
+}
+
+/* som fancy animations */
+.top-link {
+
+  background:
+    linear-gradient(rgb(0, 127, 50) 0 0) var(--p, -101%) 100% /50% 2.5px no-repeat,
+    linear-gradient(90deg, rgb(0, 127, 50) 50%, transparent 0) bottom /var(--d, 0) 2.5px no-repeat;
+  transition: 0.3s, background-size 0.3s 0.3s;
+}
+.top-link:hover,
+.top-link.nuxt-link-active {
+  --d: 100%;
+  --p: 100%;
+  transition: 0.3s, background-position 0.3s 0.3s
 }
 </style>

@@ -5,6 +5,7 @@
     <Footer />
     <BottomNav />
     <Consent />
+    <portal-target name="modal"/>
   </div>
 </template>
 

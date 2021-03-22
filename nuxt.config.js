@@ -25,14 +25,15 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/composition-api.js',
-    '~/plugins/dynamic-components.js',
-    '~/plugins/vuetensils.client.js',
+    '~/plugins/composition-api',
+    '~/plugins/dynamic-components',
+    '~/plugins/vuetensils.client',
     '~/plugins/vue-formulate',
-    '~/plugins/gtag-plugin.client.js',
-    '~/plugins/crisp.client.js',
-    '~/plugins/storyblok-rich-text-renderer.js',
-    '~/plugins/vue-snap'
+    '~/plugins/gtag-plugin.client',
+    '~/plugins/crisp.client',
+    '~/plugins/storyblok-rich-text-renderer',
+    '~/plugins/vue-snap',
+    '~/plugins/portal'
     //'~/plugins/pusher.client.js'
   ],
 

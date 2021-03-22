@@ -1,25 +1,28 @@
 <template>
-  <client-only>
-    <VDialog v-model="dialog" bg-transition="fade" class="my-dialog">
-      <p class="mb-4">Vill du bli en i statestiken?</p>
-      <div class="flex justify-between text-sm font-semibold">
-        <button
-          @click="consent(true)"
-          class="shadow block border-green-600 border-2 rounded-full focus:outline-none focus:border-green-600 px-4 py-2 text-green-600 hover:bg-green-600 hover:text-white"
-        >
-          <span>OK</span>
-        </button>
-        <button
-          @click="consent(false)"
-          class="shadow block border-green-600 border-2 rounded-full focus:outline-none focus:border-green-600 px-4 py-2 text-green-600 hover:bg-green-600 hover:text-white"
-        >
-          <span>NEJ TACK</span>
-        </button>
-      </div>
-    </VDialog>
-  </client-only>
+  <base-modal
+    v-if="dialog"
+    @close="consent(false)"
+    strict
+    title="Vi använder kakor"
+  >
+    <p class="text-sm leading-5 text-gray-600">
+      We use cookies to personalise content and ads, to provide social media
+      features and to analyse our traffic. We also share information about your
+      use of our site with our social media, advertising and analytics partners
+      who may combine it with other information that you’ve provided to them or
+      that they’ve collected from your use of their services
+    </p>
+    <template v-slot:footer>
 
-  
+        <simple-button secondary rounded @click="consent(false)">
+          Okej
+        </simple-button>
+        <simple-button primary rounded @click="consent(false)">
+          Alldrig!
+        </simple-button>
+     
+    </template>
+  </base-modal>
 </template>
 
 <script>
@@ -51,7 +54,7 @@ export default {
       setTimeout(() => {
         this.dialog = true;
       }, 800);
-    } else if (consent === 'ok') {
+    } else if (consent === "ok") {
       this.enablePlugin();
     }
   },
