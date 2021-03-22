@@ -173,22 +173,43 @@
                 ]"
               />
               <div></div>
-              <FormulateInput
+              
+              <simple-button
+                rounded
+                primary
                 :disabled="isLoading || hasErrors"
                 type="submit"
-                :label="isLoading ? 'Bearbetar...' : 'Slutför beställning'"
-              />
+              >
+                {{isLoading ? 'Bearbetar...' : 'Slutför beställning'}}
+              </simple-button>
             </div>
           </FormulateForm>
         </div>
       </collapse-transition>
     </FancyWaves>
+
+    <base-modal
+      v-if="confirmationModal"
+      @close="handleConfirmation"
+      title="Tack för förtroendet"
+    >
+      <p class="text-sm leading-5 text-gray-600">
+        Vi kommer att ta över leveransen den xx-xx-xx och om allt går bra
+        behöver du inte göra nånting. Fakturering kommer att ske på valt vis.
+        bla bla. Vi skickar även en bekräftelse till dig på mail
+      </p>
+      <template v-slot:footer>
+        <simple-button primary rounded @click="handleConfirmation">
+          Okej
+        </simple-button>
+      </template>
+    </base-modal>
   </section>
 </template>
 
 <script>
 import debounce from "lodash/debounce";
-import { info } from "@/services/person.service"
+import { info } from "@/services/person.service";
 
 export default {
   props: {
@@ -198,6 +219,7 @@ export default {
     },
   },
   data: () => ({
+    confirmationModal: false,
     loading: false,
     showOffers: false,
     showSignupForm: false,
@@ -253,13 +275,6 @@ export default {
   },
 
   mounted() {
-    /*
-    const channel = this.$pusher.subscribe('prices');
-    channel.bind('price-event', function(data) {
-      console.log(JSON.stringify(data));
-    });
-    */
-
     const savedState = JSON.parse(localStorage.getItem("state"));
     if (savedState && savedState.formData) {
       // hydrate form data and journey state
@@ -274,24 +289,38 @@ export default {
   },
   methods: {
     submitted(data) {
-      // reset saved state after compleated signup
-      localStorage.removeItem("state");
+      return new Promise((resolve) =>
+        setTimeout(() => {
+          resolve();
+          this.confirmationModal = true;
+          // reset saved state after compleated signup
+          localStorage.removeItem("state");
+        }, 1500)
+      );
+    },
+    handleConfirmation() {
+      this.confirmationModal = false;
     },
     getPerson(pnr) {
       // fake async request
       this.loading = true;
-      info(pnr).then((res) => res.json()).then((data) => {
-        console.info('peronal stuff', data);
-        this.setInitialForm(data);
-        this.loading = false;
-        this.showOffers = true;
-        this.saveProgress();
-        setTimeout(() => {
-          const cancelScroll = this.$scrollTo("#plans", 300, { offset: -200 });
-        }, 300);
-      }).catch(e => {
-        console.warn('failed to get peronal stuff');
-      });
+      info(pnr)
+        .then((res) => res.json())
+        .then((data) => {
+          console.info("peronal stuff", data);
+          this.setInitialForm(data);
+          this.loading = false;
+          this.showOffers = true;
+          this.saveProgress();
+          setTimeout(() => {
+            const cancelScroll = this.$scrollTo("#plans", 300, {
+              offset: -200,
+            });
+          }, 300);
+        })
+        .catch((e) => {
+          console.warn("failed to get peronal stuff");
+        });
     },
     setInitialForm(data) {
       this.formData = {
@@ -299,8 +328,8 @@ export default {
         surname: data.last_name,
         address: data.address,
         zip: data.zip_code,
-        city: data.city
-      }
+        city: data.city,
+      };
     },
     onSelected(plan) {
       this.selectedPlanId = plan.id;

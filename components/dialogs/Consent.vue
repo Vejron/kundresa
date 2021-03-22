@@ -60,33 +60,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: 0.5s ease opacity;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.my-dialog .vts-dialog {
-  background: rgba(0, 0, 0, 0.6);
-}
-
-.my-dialog .vts-dialog__content {
-  position: relative;
-  border-radius: 7px;
-  padding: 20px;
-  font-family: sans-serif;
-  background: #fff;
-  transition: 0.3s ease transform;
-}
-
-.my-dialog .fade-enter .vts-dialog__content,
-.my-dialog .fade-leave-active .vts-dialog__content {
-  transform: translateY(20px);
-}
-</style>

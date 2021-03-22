@@ -1,6 +1,6 @@
 <template>
   <portal to="modal">
-    <transition name="fade">
+    <transition appear name="fade">
       <div
         class="fixed z-50 bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center"
       >
@@ -19,7 +19,7 @@
         >
           <div class="bg-white px-4 pt-4 pb-4 sm:p-5 sm:pb-5">
             <div class="sm:flex sm:items-start">
-              <div class="mt-3 w-full text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <div class="mt-3 w-full sm:mt-0">
                 <div class="flex items-center justify-between mb-4">
                   <h3
                     class="text-xl leading-6 font-semibold text-gray-900"
@@ -47,7 +47,7 @@
               </div>
             </div>
           </div>
-          <div class="bg-gray-50 px-4 py-6 sm:px-6 flex gap-6 justify-end">
+          <div class="bg-gray-50 px-4 py-6 sm:px-5 flex gap-6 justify-end">
             <slot name="footer"> </slot>
           </div>
         </div>
@@ -106,15 +106,17 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style lang="postcss" scoped>
 .scrollable {
   height: 300px;
   overflow-y: scroll;
 }
+
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.25s ease-out;
+  transition: .35s ease opacity;
 }
+
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
