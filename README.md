@@ -1,22 +1,25 @@
 # fake-snake
 
+## prerequisites
+
+Install Nodejs 14.16.0 LTS and Yarn (classic) as package manager.
+Strong recomendation, install VS Code with at least the following plugins:
+Tailwind CSS IntelliSense,
+Vetur (Vue tooling for VS Code) 
 ## Build Setup
 
 ```bash
-# clone project
-$ git clone https://github.com/Vejron/kundresa.git
+# clone project (the hack branch)
+$ git clone -b hack https://github.com/Vejron/kundresa.git
 
 # install dependencies
 $ yarn install
 
-# serve with hot reload at localhost:3000
+# serve / develop with hot reload at localhost:3000
 $ yarn dev
 
-# generate static project and launch server
+# generate static project and launch local production server
 $ yarn generate
-
-# build for production and launch server
-$ yarn build
 $ yarn start
 
 ```
