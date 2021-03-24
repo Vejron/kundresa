@@ -147,6 +147,17 @@
               class="mt-8 sm:rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tl from-gray-200 via-white to-white"
             >
               <h2 class="text-primary sm:text-lg font-bold mb-6 uppercase">
+                Från när ska avtalet börja gälla?
+              </h2>
+              <p class="text-sm font-semibold text-gray-600 mb-4">
+                Avtalet börjar gälla tidigast om 28 dagar
+              </p>
+              <datetime v-model="startDate" :min-datetime="minDate" :max-datetime="maxDate" format="DDD"></datetime>
+            </div>
+            <div
+              class="mt-8 sm:rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tl from-gray-200 via-white to-white"
+            >
+              <h2 class="text-primary sm:text-lg font-bold mb-6 uppercase">
                 Låt oss hjälpa dig att ta reda på Anläggnings-ID och Områdes-ID
               </h2>
               <FormulateInput
@@ -194,7 +205,7 @@
       title="Tack för förtroendet"
     >
       <p class="text-sm leading-5 text-gray-600">
-        Vi kommer att ta över leveransen den xx-xx-xx och om allt går bra
+        Vi kommer att ta över leveransen den {{startDate}} och om allt går bra
         behöver du inte göra nånting. Fakturering kommer att ske på valt vis.
         bla bla. Vi skickar även en bekräftelse till dig på mail
       </p>
@@ -225,6 +236,9 @@ export default {
     showSignupForm: false,
     selectedPlanId: null,
     pnr: "",
+    startDate: new Date().addDays(28).toISOString().slice(0, 10),
+    minDate: new Date().addDays(28).toISOString().slice(0, 10),
+    maxDate: new Date().addDays(30 * 14).toISOString().slice(0, 10),
     usage: 14000,
 
     fakeCustomer: {
