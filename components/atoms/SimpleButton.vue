@@ -53,7 +53,6 @@ export default defineComponent({
     @apply transition-all;
     @apply duration-300;
     @apply truncate;
-    @apply w-full;
     @apply font-semibold;
   }
   .is-disabled {

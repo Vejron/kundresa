@@ -207,22 +207,15 @@
       </collapse-transition>
     </FancyWaves>
 
-    <base-modal
-      v-if="confirmationModal"
+    <confirm-sign
+      :visible="confirmationModal"
       @close="handleConfirmation"
-      :title="body.confirmationheading"
+      :title="body.confirmaitionheading"
+      :date="startDate"
+      :data="formData"
     >
-      <p class="text-sm leading-5 text-gray-600">
-        Vi kommer att ta över leveransen den {{ startDate }} och om allt går bra
-        behöver du inte göra nånting. Fakturering kommer att ske på valt vis.
-        bla bla. Vi skickar även en bekräftelse till dig på mail
-      </p>
-      <template v-slot:footer>
-        <simple-button primary rounded @click="handleConfirmation">
-          Okej
-        </simple-button>
-      </template>
-    </base-modal>
+    </confirm-sign>
+    
   </section>
 </template>
 
@@ -312,7 +305,7 @@ export default {
         setTimeout(() => {
           resolve();
           this.confirmationModal = true;
-        }, 1500)
+        }, 100)
       );
     },
     handleConfirmation() {
@@ -321,10 +314,9 @@ export default {
     getPerson(pnr) {
       this.loading = true;
       info(pnr)
-        .then((res) => res.json())
-        .then((data) => {
-          console.info("peronal stuff", data);
-          this.setInitialForm(data);
+        .then((res) => {
+          console.info("personal stuff", res.data);
+          this.setInitialForm(res.data);
           this.loading = false;
           this.showOffers = true;
           setTimeout(() => {
@@ -334,7 +326,15 @@ export default {
           }, 300);
         })
         .catch((e) => {
-          console.warn("failed to get peronal stuff");
+          console.warn("failed to get personal stuff - using fake");
+          this.setInitialForm(this.fakeCustomer);
+          this.loading = false;
+          this.showOffers = true;
+          setTimeout(() => {
+            const cancelScroll = this.$scrollTo("#plans", 300, {
+              offset: -200,
+            });
+          }, 300);
         });
     },
     setInitialForm(data) {
@@ -343,7 +343,7 @@ export default {
         tel: data.mobile,
         name: data.firstName,
         surname: data.lastname,
-        address: data.address.streetName + ' ' + data.address.streetNumber,
+        address: data.address.streetName + " " + data.address.streetNumber,
         zip: data.address.postalCode,
         city: data.address.postalAddress,
       };
