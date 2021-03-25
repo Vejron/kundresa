@@ -1,12 +1,14 @@
 <template>
-  <section class="relative">
+  <section v-editable="body" class="relative">
     <div id="elbuy" class="absolute sr-only -top-32"></div>
     <div class="lg:text-center max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
-      <h2 class="text-lg text-primary font-semibold uppercase">Kundresan</h2>
+      <h2 class="text-lg text-primary font-semibold uppercase">
+        {{ body.headline }}
+      </h2>
       <h3
         class="mt-2 mb-5 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl"
       >
-        Fixa elhandelsavtal på några klick
+        {{ body.subheading }}
       </h3>
       <div class="relative max-w-xs lg:mx-auto">
         <input
@@ -28,7 +30,7 @@
             v-if="showOffers"
             class="relative md:text-lg text-gray-500 lg:flex flex-col items-center"
           >
-            Varsågod det här kan vi erbjuda dig
+            {{ body.helpheading }}
             <svg
               class="-bottom-10 text-upink animate-bounce absolute w-6 h-6 text-amber-900"
               fill="none"
@@ -152,7 +154,13 @@
               <p class="text-sm font-semibold text-gray-600 mb-4">
                 Avtalet börjar gälla tidigast om 28 dagar
               </p>
-              <datetime v-model="startDate" :min-datetime="minDate" :max-datetime="maxDate" format="DDD"></datetime>
+              <datetime
+                class="rounded"
+                v-model="startDate"
+                :min-datetime="minDate"
+                :max-datetime="maxDate"
+                format="DDD"
+              ></datetime>
             </div>
             <div
               class="mt-8 sm:rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tl from-gray-200 via-white to-white"
@@ -184,14 +192,14 @@
                 ]"
               />
               <div></div>
-              
+
               <simple-button
                 rounded
                 primary
                 :disabled="isLoading || hasErrors"
                 type="submit"
               >
-                {{isLoading ? 'Bearbetar...' : 'Slutför beställning'}}
+                {{ isLoading ? "Bearbetar..." : "Slutför beställning" }}
               </simple-button>
             </div>
           </FormulateForm>
@@ -205,7 +213,7 @@
       title="Tack för förtroendet"
     >
       <p class="text-sm leading-5 text-gray-600">
-        Vi kommer att ta över leveransen den {{startDate}} och om allt går bra
+        Vi kommer att ta över leveransen den {{ startDate }} och om allt går bra
         behöver du inte göra nånting. Fakturering kommer att ske på valt vis.
         bla bla. Vi skickar även en bekräftelse till dig på mail
       </p>
@@ -238,17 +246,28 @@ export default {
     pnr: "",
     startDate: new Date().addDays(28).toISOString().slice(0, 10),
     minDate: new Date().addDays(28).toISOString().slice(0, 10),
-    maxDate: new Date().addDays(30 * 14).toISOString().slice(0, 10),
+    maxDate: new Date()
+      .addDays(30 * 14)
+      .toISOString()
+      .slice(0, 10),
     usage: 14000,
 
     fakeCustomer: {
-      pnr: "19791106-8513",
-      name: "Björn Yttergren",
-      address: "Pastorsvägen 10",
-      zip: "903 62",
-      city: "Umeå",
-      planId: 1,
-      usage: 0,
+      address: {
+        countryCode: "SE",
+        postalAddress: "Rakvattnet",
+        postalCode: "90000",
+        streetName: "Storgatan",
+        streetNumber: "1",
+      },
+      bankCode: "ICA",
+      customerId: "19000101-1234",
+      customerType: "PRIVATE",
+      email: "name@mail.com",
+      firstName: "Test",
+      lastname: "Testsson",
+      mobile: "070-1000000",
+      name: "TEst Testsson",
     },
     formData: {},
   }),
@@ -274,41 +293,25 @@ export default {
     },
   },
   watch: {
-    formData() {
-      this.saveProgress();
-    },
+    formData() {},
     isAny(value) {
       if (this.isValidPnr) {
         this.getPerson(this.pnr);
       } else {
         this.showOffers = false;
         this.showSignupForm = false;
-        this.saveProgress();
       }
     },
   },
 
-  mounted() {
-    const savedState = JSON.parse(localStorage.getItem("state"));
-    if (savedState && savedState.formData) {
-      // hydrate form data and journey state
-      this.formData = savedState.formData;
-      this.loading = savedState.loading;
-      this.showOffers = savedState.showOffers;
-      this.showSignupForm = savedState.showSignupForm;
-      this.selectedPlanId = savedState.selectedPlanId;
-      this.pnr = savedState.pnr;
-      this.usage = savedState.usage;
-    }
-  },
+  mounted() {},
   methods: {
     submitted(data) {
+      console.log(data);
       return new Promise((resolve) =>
         setTimeout(() => {
           resolve();
           this.confirmationModal = true;
-          // reset saved state after compleated signup
-          localStorage.removeItem("state");
         }, 1500)
       );
     },
@@ -325,7 +328,6 @@ export default {
           this.setInitialForm(data);
           this.loading = false;
           this.showOffers = true;
-          this.saveProgress();
           setTimeout(() => {
             const cancelScroll = this.$scrollTo("#plans", 300, {
               offset: -200,
@@ -338,11 +340,13 @@ export default {
     },
     setInitialForm(data) {
       this.formData = {
-        name: data.first_name,
-        surname: data.last_name,
-        address: data.address,
-        zip: data.zip_code,
-        city: data.city,
+        mail: data.email,
+        tel: data.mobile,
+        name: data.firstName,
+        surname: data.lastname,
+        address: data.address.streetName + ' ' + data.address.streetNumber,
+        zip: data.address.postalCode,
+        city: data.address.postalAddress,
       };
     },
     onSelected(plan) {
@@ -351,44 +355,7 @@ export default {
       setTimeout(() => {
         const cancelScroll = this.$scrollTo("#personal", 300, { offset: -200 });
       }, 300);
-      this.saveProgress();
-      return;
-      // push a route with the customer, plan and usage as a queryparam
-      // we will read it later on the order route to prepopulate a form
-      this.$router.push({
-        path: "/order",
-        query: {
-          data: JSON.stringify({
-            ...this.fakeCustomer,
-            planId: plan.id,
-            usage: this.usage,
-          }),
-        },
-      });
     },
-    saveProgress: debounce(function (e) {
-      return;
-      const state = {
-        formData: this.formData,
-        loading: this.loading,
-        showOffers: this.showOffers,
-        showSignupForm: this.showSignupForm,
-        selectedPlanId: this.selectedPlanId,
-        pnr: this.pnr,
-        usage: this.usage,
-      };
-      console.log("progress saved", state);
-      localStorage.setItem("state", JSON.stringify(state));
-    }, 500),
-
-    /*showOffers() {
-      this.showOffers = !this.showOffers;
-      if (this.showOffers) {
-        setTimeout(() => {
-          const cancelScroll = this.$scrollTo("#plans", 300, { offset: -65 });
-        }, 300);
-      }
-    },*/
   },
 };
 </script>
