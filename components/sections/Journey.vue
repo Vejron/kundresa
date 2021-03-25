@@ -154,19 +154,58 @@
               <p class="text-sm font-semibold text-gray-600 mb-4">
                 Avtalet börjar gälla tidigast om 28 dagar
               </p>
-              <datetime
-                class="rounded"
-                v-model="startDate"
-                :min-datetime="minDate"
-                :max-datetime="maxDate"
-                format="DDD"
-              ></datetime>
+              <FormulateInput
+                type="date"
+                name="startDate"
+                placeholder="Startdatum"
+                help="Ange startdatum för avtalet"
+                validation="required"
+                :validation-messages="{ required: 'Du måste ange ett startdatum' }"
+                :min="minDate"
+                :max="maxDate"
+                error-behavior="live"
+              />
             </div>
+            
             <div
               class="mt-8 sm:rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tl from-gray-200 via-white to-white"
             >
               <h2 class="text-primary sm:text-lg font-bold mb-6 uppercase">
-                Låt oss hjälpa dig att ta reda på Anläggnings-ID och Områdes-ID
+                Ange Anläggnings-ID
+              </h2>
+              <FormulateInput
+                type="radio"
+                v-model="anlaggning"
+                name="anlaggning"
+                label="Anläggnings-ID"
+                help="Du kan ange ID eller låta oss hämta det"
+                validation="required"
+                :options="[
+                  {
+                    value: 'manuellt',
+                    label: 'Ange ID',
+                    id: 'manuellt',
+                    disabled: false,
+                  },
+                  { value: 'automatiskt', label: 'Jag ger Fake snake AB fullmakt att kontakta min nätägare och nuvarande elleverantör för att komplettera uppgifter om anläggnings-ID' }
+                ]"
+              />
+              <FormulateInput
+                  type="text"
+                  name="anlaggningsId"
+                  label="Anläggnings-ID"
+                  validation="matches:/^735999[0-9]{12}$/"
+                  :validation-messages="{ matches: 'Anläggnings-ID ska bestå av 18 siffror och börja med 735999.' }"
+                  visible="false"
+                  v-if="anlaggning=='manuellt'"
+                />
+            </div>
+
+            <div
+              class="mt-8 sm:rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tl from-gray-200 via-white to-white"
+            >
+              <h2 class="text-primary sm:text-lg font-bold mb-6 uppercase">
+                Slutför beställning
               </h2>
               <FormulateInput
                 name="consent"
@@ -178,18 +217,26 @@
               <FormulateInput
                 type="radio"
                 name="invoice"
+                v-model="invoiceType"
                 label="Skicka fakturan via:"
-                help="För snabbast handläggning välj e-post"
+                help="För snabbast handläggning välj e-faktura eller e-post"
+                validation="required"
                 :options="[
+                  { value: 'efaktura', label: 'E-faktura' },                  
                   {
                     value: 'email',
-                    label: 'E-post',
-                    id: 'my-first',
-                    disabled: false,
-                  }, // this checkbox is disabled
+                    label: 'E-post'
+                  },
                   { value: 'sms', label: 'SMS' },
                   { value: 'post', label: 'Post' },
                 ]"
+              />
+              <FormulateInput
+                type="select"
+                name="bank"
+                v-if="invoiceType=='efaktura'"
+                label="Välj bank för e-faktura"
+                :options="['Nordea','Swedbank och Sparbankerna','Danske Bank','Forex Bank','Handelsbanken','ICA Banken','Länsförsäkringar Bank','Marginalen Bank','SEB','Skandiabanken','Sparbanken Syd','Svea Bank','Ålandsbanken']"
               />
               <div></div>
 
@@ -211,7 +258,7 @@
       :visible="confirmationModal"
       @close="handleConfirmation"
       :title="body.confirmaitionheading"
-      :date="startDate"
+      :date="formData.startDate"
       :data="formData"
     >
     </confirm-sign>
@@ -237,12 +284,14 @@ export default {
     showSignupForm: false,
     selectedPlanId: null,
     pnr: "",
-    startDate: new Date().addDays(28).toISOString().slice(0, 10),
     minDate: new Date().addDays(28).toISOString().slice(0, 10),
     maxDate: new Date()
       .addDays(30 * 14)
       .toISOString()
       .slice(0, 10),
+    anlaggning: "manuellt",
+    anlaggningsId: "",
+    invoiceType: "",
     usage: 14000,
 
     fakeCustomer: {
@@ -346,6 +395,7 @@ export default {
         address: data.address.streetName + " " + data.address.streetNumber,
         zip: data.address.postalCode,
         city: data.address.postalAddress,
+        startDate: new Date().addDays(28).toISOString().slice(0, 10)
       };
     },
     onSelected(plan) {
