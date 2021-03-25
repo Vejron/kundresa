@@ -171,7 +171,7 @@
               <FormulateInput
                 name="consent"
                 type="checkbox"
-                label="Jag ger Fake snake AB fullmakt att kontakta min nätägare och nuvarande elleverantör för att komplettera uppgifter om anläggnings-ID och områdes-ID samt säga upp mitt befintliga elavtal till det datum då det löper ut."
+                :label="body.disclaimer1"
                 validation="required"
               />
 
@@ -210,7 +210,7 @@
     <base-modal
       v-if="confirmationModal"
       @close="handleConfirmation"
-      title="Tack för förtroendet"
+      :title="body.confirmationheading"
     >
       <p class="text-sm leading-5 text-gray-600">
         Vi kommer att ta över leveransen den {{ startDate }} och om allt går bra
@@ -319,7 +319,6 @@ export default {
       this.confirmationModal = false;
     },
     getPerson(pnr) {
-      // fake async request
       this.loading = true;
       info(pnr)
         .then((res) => res.json())
