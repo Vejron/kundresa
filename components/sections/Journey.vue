@@ -154,13 +154,17 @@
               <p class="text-sm font-semibold text-gray-600 mb-4">
                 Avtalet börjar gälla tidigast om 28 dagar
               </p>
-              <datetime
-                class="rounded"
-                v-model="startDate"
-                :min-datetime="minDate"
-                :max-datetime="maxDate"
-                format="DDD"
-              ></datetime>
+              <FormulateInput
+                type="date"
+                name="startDate"
+                placeholder="Startdatum"
+                help="Ange startdatum för avtalet"
+                validation="required"
+                :validation-messages="{ required: 'Du måste ange ett startdatum' }"
+                :min="minDate"
+                :max="maxDate"
+                error-behavior="live"
+              />
             </div>
             
             <div
@@ -213,18 +217,26 @@
               <FormulateInput
                 type="radio"
                 name="invoice"
+                v-model="invoiceType"
                 label="Skicka fakturan via:"
-                help="För snabbast handläggning välj e-post"
+                help="För snabbast handläggning välj e-faktura eller e-post"
+                validation="required"
                 :options="[
+                  { value: 'efaktura', label: 'E-faktura' },                  
                   {
                     value: 'email',
-                    label: 'E-post',
-                    id: 'my-first',
-                    disabled: false,
-                  }, // this checkbox is disabled
+                    label: 'E-post'
+                  },
                   { value: 'sms', label: 'SMS' },
                   { value: 'post', label: 'Post' },
                 ]"
+              />
+              <FormulateInput
+                type="select"
+                name="bank"
+                v-if="invoiceType=='efaktura'"
+                label="Välj bank för e-faktura"
+                :options="['Nordea','Swedbank och Sparbankerna','Danske Bank','Forex Bank','Handelsbanken','ICA Banken','Länsförsäkringar Bank','Marginalen Bank','SEB','Skandiabanken','Sparbanken Syd','Svea Bank','Ålandsbanken']"
               />
               <div></div>
 
@@ -248,7 +260,7 @@
       :title="body.confirmationheading"
     >
       <p class="text-sm leading-5 text-gray-600">
-        Vi kommer att ta över leveransen den {{ startDate }} och om allt går bra
+        Vi kommer att ta över leveransen den {{ formData.startDate }} och om allt går bra
         behöver du inte göra nånting. Fakturering kommer att ske på valt vis.
         bla bla. Vi skickar även en bekräftelse till dig på mail
       </p>
@@ -279,7 +291,6 @@ export default {
     showSignupForm: false,
     selectedPlanId: null,
     pnr: "",
-    startDate: new Date().addDays(28).toISOString().slice(0, 10),
     minDate: new Date().addDays(28).toISOString().slice(0, 10),
     maxDate: new Date()
       .addDays(30 * 14)
@@ -287,6 +298,7 @@ export default {
       .slice(0, 10),
     anlaggning: "manuellt",
     anlaggningsId: "",
+    invoiceType: "",
     usage: 14000,
 
     fakeCustomer: {
@@ -383,6 +395,7 @@ export default {
         address: data.address.streetName + ' ' + data.address.streetNumber,
         zip: data.address.postalCode,
         city: data.address.postalAddress,
+        startDate: new Date().addDays(28).toISOString().slice(0, 10)
       };
     },
     onSelected(plan) {
