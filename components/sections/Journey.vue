@@ -162,11 +162,46 @@
                 format="DDD"
               ></datetime>
             </div>
+            
             <div
               class="mt-8 sm:rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tl from-gray-200 via-white to-white"
             >
               <h2 class="text-primary sm:text-lg font-bold mb-6 uppercase">
-                Låt oss hjälpa dig att ta reda på Anläggnings-ID och Områdes-ID
+                Ange Anläggnings-ID
+              </h2>
+              <FormulateInput
+                type="radio"
+                v-model="anlaggning"
+                name="anlaggning"
+                label="Anläggnings-ID"
+                help="Du kan ange ID eller låta oss hämta det"
+                validation="required"
+                :options="[
+                  {
+                    value: 'manuellt',
+                    label: 'Ange ID',
+                    id: 'manuellt',
+                    disabled: false,
+                  },
+                  { value: 'automatiskt', label: 'Jag ger Fake snake AB fullmakt att kontakta min nätägare och nuvarande elleverantör för att komplettera uppgifter om anläggnings-ID' }
+                ]"
+              />
+              <FormulateInput
+                  type="text"
+                  name="anlaggningsId"
+                  label="Anläggnings-ID"
+                  validation="matches:/^735999[0-9]{12}$/"
+                  :validation-messages="{ matches: 'Anläggnings-ID ska bestå av 18 siffror och börja med 735999.' }"
+                  visible="false"
+                  v-if="anlaggning=='manuellt'"
+                />
+            </div>
+
+            <div
+              class="mt-8 sm:rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tl from-gray-200 via-white to-white"
+            >
+              <h2 class="text-primary sm:text-lg font-bold mb-6 uppercase">
+                Slutför beställning
               </h2>
               <FormulateInput
                 name="consent"
@@ -250,6 +285,8 @@ export default {
       .addDays(30 * 14)
       .toISOString()
       .slice(0, 10),
+    anlaggning: "manuellt",
+    anlaggningsId: "",
     usage: 14000,
 
     fakeCustomer: {
