@@ -61,7 +61,7 @@ export default (context, inject) => {
       selectText: "Välj fast elpris",
     };
 
-    context.store.commit('deals/setDeals', [plan1, plan2]);
+    context.store.commit('deals/setDeals', [plan1]);
     context.store.commit('deals/setLoaded', '1');
   }
 }
