@@ -301,7 +301,7 @@ export default {
     },
   },
   data: () => ({
-    confirmationModal: true,
+    confirmationModal: false,
     loading: false,
     showOffers: false,
     showSignupForm: false,
