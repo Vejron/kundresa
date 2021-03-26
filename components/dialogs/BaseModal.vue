@@ -47,7 +47,10 @@
               </div>
             </div>
           </div>
-          <div class="bg-gray-50 px-4 py-6 sm:px-5 flex gap-6 justify-end">
+          <div
+            v-if="!empty"
+            class="bg-gray-50 px-4 py-6 sm:px-5 flex gap-6 justify-end"
+          >
             <slot name="footer"> </slot>
           </div>
         </div>
@@ -57,7 +60,7 @@
 </template>
 
 <script>
-import { defineComponent, onUnmounted, ref } from "@vue/composition-api";
+import { defineComponent, onUnmounted, onMounted, ref } from "@vue/composition-api";
 
 export default defineComponent({
   name: "BaseModal",
@@ -74,6 +77,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    empty: {
+      type: Boolean,
+      default: false,
+    },
   },
   async mounted() {
     // Wait till after vue-simple-portal finishes the move
@@ -83,7 +90,9 @@ export default defineComponent({
   },
   emits: ["close"],
   setup(props, { emit }) {
-    document.addEventListener("keyup", onClose);
+    onMounted(() => {
+      document.addEventListener("keyup", onClose);
+    })
     onUnmounted(() => {
       document.removeEventListener("keyup", onClose);
     });
@@ -94,7 +103,7 @@ export default defineComponent({
       }
     };
     const handleClose = () => {
-       !props.strict && emit("close");
+      !props.strict && emit("close");
     };
     const closecross = ref(null);
     return {
@@ -114,7 +123,7 @@ export default defineComponent({
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: .35s ease opacity;
+  transition: 0.35s ease opacity;
 }
 
 .fade-enter,

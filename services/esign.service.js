@@ -13,6 +13,7 @@ export async function esign2({pnr, tosign}) {
 }
 
 export async function esign({pnr, tosign}) {
+  const cors = `https://ume-cors.herokuapp.com/`;
   return axios.post("https://hackaton.umeaenergi.se/apx/sign", {
     pnr,
     tosign

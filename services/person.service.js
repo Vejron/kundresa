@@ -14,25 +14,37 @@ export async function infoMotala(pnr) {
 }
 
 /**
-  address: {
-    countryCode: "SE"
-    postalAddress: "Rakvattnet"
-    postalCode: "90000"
-    streetName: "Storgatan"
-    streetNumber: "1" 
-  }
-  bankCode: "ICA"
-  customerId: "19000101-1234"
-  customerType: "PRIVATE"
-  email: "name@mail.com"
-  firstName: "Test"
-  lastname: "Testsson"
-  mobile: "070-1000000"
-  name: "TEst Testsson"
+  "lastName": "MEDELINKOMSTTAGAREB",
+  "registrationAddress": {
+    "streetName": "SKÅNEGATAN 7130",
+    "zipCode": "14731",
+    "city": "TUMBA"
+  },
+  "firstName": "BÄRTA",
+  "customerType": "PRIVATE",
+  "name": "BÄRTA MEDELINKOMSTTAGAREB"
+
+191703038883
+
+191603019918
+
+198001053464
+
+191602059980
+
+191703058881
+
+191703058998
+
+191703048882
+
+191703068997
+
+191603019876
  */
 
 export async function info(personalIdentityNumber) {
-  return axios.get("https://hackaton.umeaenergi.se/api/customers", {
+  return axios.get("https://hackaton1.umeaenergi.se/api/customers", {
     params: {
       personalIdentityNumber
     }
