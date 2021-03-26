@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { defineComponent, reactive, onMounted} from "@vue/composition-api";
+import { defineComponent, reactive, watch} from "@vue/composition-api";
 import { esign } from "@/services/esign.service";
 
 export default defineComponent({
@@ -92,7 +92,8 @@ export default defineComponent({
       pnr: '',
       consent: true,
     });
-    onMounted(() => {
+    
+    watch(() => props.visible, () => {
       console.log(props.pnr)
       formData.pnr = props.pnr
     })
