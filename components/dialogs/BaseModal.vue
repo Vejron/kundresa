@@ -86,7 +86,7 @@ export default defineComponent({
     // Wait till after vue-simple-portal finishes the move
     await this.$nextTick();
     // Get the close cross and focus it
-    this.$refs.closecross.focus();
+    this.$refs.closecross?.focus();
   },
   emits: ["close"],
   setup(props, { emit }) {

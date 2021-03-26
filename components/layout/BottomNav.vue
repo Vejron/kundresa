@@ -4,11 +4,7 @@
     aria-label="Main menu"
     class="block md:hidden bg-white fixed bottom-0 w-full"
   >
-    <icon-button size="32" >
-          <span class="font-light whitespace-nowrap text-sm">
-            Meny
-          </span>
-        </icon-button>
+    
     <ul class="flex justify-around">
       <li class="flex-grow py-6" v-for="link in shortcuts" :key="link.name">
         <icon-button :to="link.url" size="32" :icon="link.icon">
