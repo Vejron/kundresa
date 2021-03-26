@@ -96,12 +96,23 @@ export default defineComponent({
     pnr: String,
   },
   emits: ["close"],
-  setup(props, { emit }) {
+  setup(props, { emit, root }) {
+    
+    const theEnd = (data) => {
+      root.$router.push({
+        path: "/tack",
+        query: {
+          data: JSON.stringify(data),
+        },
+      });
+    };
+
     const sign = async (data) => {
       try {
         console.log(data);
         const res = await esign({ pnr: data.pnr, tosign: props.toSign });
         console.log("got it", res.data);
+        theEnd(res.data);
         close(true); // success!
       } catch (error) {
         console.warn("failed to sign");
