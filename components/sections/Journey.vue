@@ -160,13 +160,15 @@
                 placeholder="Startdatum"
                 help="Ange startdatum för avtalet"
                 validation="required"
-                :validation-messages="{ required: 'Du måste ange ett startdatum' }"
+                :validation-messages="{
+                  required: 'Du måste ange ett startdatum',
+                }"
                 :min="minDate"
                 :max="maxDate"
                 error-behavior="live"
               />
             </div>
-            
+
             <div
               class="mt-8 sm:rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tl from-gray-200 via-white to-white"
             >
@@ -187,18 +189,25 @@
                     id: 'manuellt',
                     disabled: false,
                   },
-                  { value: 'automatiskt', label: 'Jag ger Fake snake AB fullmakt att kontakta min nätägare och nuvarande elleverantör för att komplettera uppgifter om anläggnings-ID' }
+                  {
+                    value: 'automatiskt',
+                    label:
+                      'Jag ger Fake snake AB fullmakt att kontakta min nätägare och nuvarande elleverantör för att komplettera uppgifter om anläggnings-ID',
+                  },
                 ]"
               />
               <FormulateInput
-                  type="text"
-                  name="anlaggningsId"
-                  label="Anläggnings-ID"
-                  validation="matches:/^735999[0-9]{12}$/"
-                  :validation-messages="{ matches: 'Anläggnings-ID ska bestå av 18 siffror och börja med 735999.' }"
-                  visible="false"
-                  v-if="anlaggning=='manuellt'"
-                />
+                type="text"
+                name="anlaggningsId"
+                label="Anläggnings-ID"
+                validation="matches:/^735999[0-9]{12}$/"
+                :validation-messages="{
+                  matches:
+                    'Anläggnings-ID ska bestå av 18 siffror och börja med 735999.',
+                }"
+                visible="false"
+                v-if="anlaggning == 'manuellt'"
+              />
             </div>
 
             <div
@@ -222,10 +231,10 @@
                 help="För snabbast handläggning välj e-faktura eller e-post"
                 validation="required"
                 :options="[
-                  { value: 'efaktura', label: 'E-faktura' },                  
+                  { value: 'efaktura', label: 'E-faktura' },
                   {
                     value: 'email',
-                    label: 'E-post'
+                    label: 'E-post',
                   },
                   { value: 'sms', label: 'SMS' },
                   { value: 'post', label: 'Post' },
@@ -234,9 +243,23 @@
               <FormulateInput
                 type="select"
                 name="bank"
-                v-if="invoiceType=='efaktura'"
+                v-if="invoiceType == 'efaktura'"
                 label="Välj bank för e-faktura"
-                :options="['Nordea','Swedbank och Sparbankerna','Danske Bank','Forex Bank','Handelsbanken','ICA Banken','Länsförsäkringar Bank','Marginalen Bank','SEB','Skandiabanken','Sparbanken Syd','Svea Bank','Ålandsbanken']"
+                :options="[
+                  'Nordea',
+                  'Swedbank och Sparbankerna',
+                  'Danske Bank',
+                  'Forex Bank',
+                  'Handelsbanken',
+                  'ICA Banken',
+                  'Länsförsäkringar Bank',
+                  'Marginalen Bank',
+                  'SEB',
+                  'Skandiabanken',
+                  'Sparbanken Syd',
+                  'Svea Bank',
+                  'Ålandsbanken',
+                ]"
               />
               <div></div>
 
@@ -259,10 +282,10 @@
       @close="handleConfirmation"
       :title="body.confirmaitionheading"
       :date="formData.startDate"
-      :data="formData"
+      :toSign="formData"
+      :pnr="pnr"
     >
     </confirm-sign>
-    
   </section>
 </template>
 
@@ -278,7 +301,7 @@ export default {
     },
   },
   data: () => ({
-    confirmationModal: false,
+    confirmationModal: true,
     loading: false,
     showOffers: false,
     showSignupForm: false,
@@ -295,21 +318,16 @@ export default {
     usage: 14000,
 
     fakeCustomer: {
-      address: {
-        countryCode: "SE",
-        postalAddress: "Rakvattnet",
-        postalCode: "90000",
-        streetName: "Storgatan",
-        streetNumber: "1",
+      lastName: "LÅGINKOMSTTAGAREA",
+      registrationAddress: {
+        streetName: "UTHYRAREA, B DANDERYDSGATAN 2",
+        zipCode: "18260",
+        city: "DJURSHOLM",
       },
-      bankCode: "ICA",
-      customerId: "19000101-1234",
+      firstName: "ALLANNA JOHAMMA",
       customerType: "PRIVATE",
-      email: "name@mail.com",
-      firstName: "Test",
-      lastname: "Testsson",
-      mobile: "070-1000000",
-      name: "TEst Testsson",
+      name: "ALLANNA JOHAMMA LÅGINKOMSTTAGAREA",
+      price: 66.82,
     },
     formData: {},
   }),
@@ -349,13 +367,14 @@ export default {
   mounted() {},
   methods: {
     submitted(data) {
+      this.confirmationModal = true;
       console.log(data);
-      return new Promise((resolve) =>
+      /*return new Promise((resolve) =>
         setTimeout(() => {
           resolve();
           this.confirmationModal = true;
         }, 100)
-      );
+      );*/
     },
     handleConfirmation() {
       this.confirmationModal = false;
@@ -376,7 +395,6 @@ export default {
         })
         .catch((e) => {
           console.warn("failed to get personal stuff - using fake");
-          this.setInitialForm(this.fakeCustomer);
           this.loading = false;
           this.showOffers = true;
           setTimeout(() => {
@@ -388,14 +406,12 @@ export default {
     },
     setInitialForm(data) {
       this.formData = {
-        mail: data.email,
-        tel: data.mobile,
         name: data.firstName,
-        surname: data.lastname,
-        address: data.address.streetName + " " + data.address.streetNumber,
-        zip: data.address.postalCode,
-        city: data.address.postalAddress,
-        startDate: new Date().addDays(28).toISOString().slice(0, 10)
+        surname: data.lastName,
+        address: data.registrationAddress.streetName,
+        zip: data.registrationAddress.zipCode,
+        city: data.registrationAddress.city,
+        startDate: new Date().addDays(28).toISOString().slice(0, 10),
       };
     },
     onSelected(plan) {
