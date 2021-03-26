@@ -236,7 +236,8 @@
                 name="bank"
                 v-if="invoiceType=='efaktura'"
                 label="Välj bank för e-faktura"
-                :options="['Nordea','Swedbank och Sparbankerna','Danske Bank','Forex Bank','Handelsbanken','ICA Banken','Länsförsäkringar Bank','Marginalen Bank','SEB','Skandiabanken','Sparbanken Syd','Svea Bank','Ålandsbanken']"
+
+                :options="{NB: 'Nordea', SWB: 'Swedbank och Sparbankerna',DBH: 'Danske Bank',FOB: 'Forex Bank',SHB: 'Handelsbanken',ICAB: 'ICA Banken',LFB: 'Länsförsäkringar Bank',MAB: 'Marginalen Bank',SEB: 'SEB',SBN: 'Skandiabanken',SBS: 'Sparbanken Syd',SVB: 'Svea Bank',AAL: 'Ålandsbanken'}"
               />
               <div></div>
 
