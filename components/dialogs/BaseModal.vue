@@ -22,7 +22,7 @@
               <div class="mt-3 w-full sm:mt-0">
                 <div class="flex items-center justify-between mb-4">
                   <h3
-                    class="text-xl leading-6 font-semibold text-gray-900"
+                    class="text-xl md:text-2xl leading-6 font-semibold text-gray-900"
                     id="modal-headline"
                   >
                     {{ title }}

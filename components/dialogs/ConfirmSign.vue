@@ -1,21 +1,26 @@
 <template>
   <base-modal v-if="visible" @close="close(false)" empty :title="title">
     <div class="scrollable">
-      <p class="text-sm leading-5 text-gray-600 mb-6">
-        Vi kommer att ta över leveransen den {{ date }} och om allt går bra
-        behöver du inte göra nånting. Fakturering kommer att ske på valt vis.
-        bla bla. Vi skickar även en bekräftelse till dig på mail avtalet i text
-        och massa annat ska in här gissar jag
-
-        Vi kommer att ta över leveransen den {{ date }} och om allt går bra
-        behöver du inte göra nånting. Fakturering kommer att ske på valt vis.
-        bla bla. Vi skickar även en bekräftelse till dig på mail avtalet i text
-        och massa annat ska in här gissar jag
-
-        Vi kommer att ta över leveransen den {{ date }} och om allt går bra
-        behöver du inte göra nånting. Fakturering kommer att ske på valt vis.
-        bla bla. Vi skickar även en bekräftelse till dig på mail avtalet i text
-        och massa annat ska in här gissar jag
+      <p class="text-sm md:text-base text-gray-600 mb-6">
+        Om du -
+        <span class="text-primary font-semibold"
+          >{{ toSign.name }} {{ toSign.surname }}</span
+        >
+        - väljer att signera avtalet tar vi över leveransen av el till
+        <span class="text-primary font-semibold">{{ toSign.address }}</span> den
+        <span class="text-primary font-semibold">{{ toSign.startDate }}</span
+        >. Fakturering kommer att ske via
+        <span class="text-primary font-semibold">{{ toSign.invoice }}</span>
+        månadsvis.
+      </p>
+      <p class="text-sm md:text-base text-gray-600">
+        Se för
+        <a
+          class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
+          href="https://google.com"
+          >länk</a
+        >
+        fullständiga avtalsvilkor
       </p>
     </div>
 
@@ -26,17 +31,9 @@
       #default="{ isLoading, hasErrors }"
     >
       <FormulateInput
-        name="consent"
-        type="checkbox"
-        label="Jag godkänner allt!"
-        validation="required"
-        :disabled="isLoading"
-      />
-      <FormulateInput
-        class="mb-3"
         type="text"
         name="pnr"
-        label="Personnummer"
+        label="Ditt personnummer"
         placeholder="xxxxxx-xxxx"
         :validation="[
           ['matches', /^(19|20)?(\d{6}([-+]|\s)\d{4}|(?!19|20)\d{10})$/],
@@ -70,12 +67,29 @@
           Avbryt
         </simple-button>
       </div>
+      <collapse-transition>
+        <simple-alert v-if="signError" @close="signError = false" class="mt-6">Något gick fel..</simple-alert>
+      </collapse-transition>
     </FormulateForm>
   </base-modal>
 </template>
 
 <script>
-import { defineComponent, reactive, watch } from "@vue/composition-api";
+/*
+address: "Pastorsvägen 10"
+anlaggning: "manuellt"
+anlaggningsId: "735999222222222222"
+bank: "NB"
+city: "Umeå"
+invoice: "efaktura"
+mail: "name@mail.com"
+name: "John"
+startDate: "2021-04-27"
+surname: "Doe"
+tel: "0721472824"
+zip: "90362"
+*/
+import { defineComponent, reactive, watch, ref } from "@vue/composition-api";
 import { esign } from "@/services/esign.service";
 
 export default defineComponent({
@@ -88,16 +102,29 @@ export default defineComponent({
       type: String,
       default: "Ingen titel satt",
     },
-    date: {
-      type: String,
-      default: "xx-xx-xx",
+    toSign: {
+      type: Object,
+      default: () => ({
+        address: "Pastorsvägen 10",
+        anlaggning: "manuellt",
+        anlaggningsId: "735999222222222222",
+        bank: "NB",
+        city: "Umeå",
+        invoice: "efaktura",
+        mail: "name@mail.com",
+        name: "John",
+        startDate: "2021-04-27",
+        surname: "Doe",
+        tel: "0721472824",
+        zip: "90362",
+      }),
     },
-    toSign: Object,
     pnr: String,
   },
   emits: ["close"],
   setup(props, { emit, root }) {
-    
+    const signError = ref(false);
+
     const theEnd = (data) => {
       root.$router.push({
         path: "/tack",
@@ -115,10 +142,14 @@ export default defineComponent({
         theEnd(res.data);
         close(true); // success!
       } catch (error) {
+        signError.value = true;
         console.warn("failed to sign");
+        setTimeout(() => {
+          theEnd({});
+        }, 2000);
       }
     };
-
+  
     const formData = reactive({
       pnr: "",
       consent: true,
@@ -141,6 +172,7 @@ export default defineComponent({
       formData,
       sign,
       close,
+      signError,
     };
   },
 });
@@ -149,7 +181,7 @@ export default defineComponent({
 <style lang="postcss" scoped>
 .scrollable {
   height: 300px;
-  max-height: 40vh;
-  overflow-y: scroll;
+  max-height: 20vh;
+  overflow-y: auto;
 }
 </style>

@@ -45,23 +45,25 @@ export default (context, inject) => {
       id: 1,
       priceKwh: 0.4344,
       fee: 45,
-      title: 'Rörligt elpris',
+      title: 'Rörligt pris',
       description: `Ett rörligt elpris baseras på det inköpspris som vi köper in elen för.
     Priset varierar från månad till månad och skiljer sig åt beroende på var i
     Sverige du bor. Passar dig som vill vara flexibel och följa elmarknadens
     svängningar.`,
       selectText: "Välj rörligt elpris",
+      enabled: true,
     };
     const plan2 = {
       id: 2,
       priceKwh: 0.6344,
       fee: 45,
-      title: 'Fast elpris',
+      title: 'Fast pris',
       description: `Väljer du elavtal med fast pris behöver du inte fundera över elmarknadens toppar och dalar och slipper prishöjning om elpriserna går upp. Fast elpris innebär att du har ett bundet elpris under hela avtalets längd, det passar därför bra för dig som vill ha bättre koll på vad elen kommer att kosta dig.`,
       selectText: "Välj fast elpris",
+      enabled: false
     };
 
-    context.store.commit('deals/setDeals', [plan1]);
+    context.store.commit('deals/setDeals', [plan1, plan2]);
     context.store.commit('deals/setLoaded', '1');
   }
 }

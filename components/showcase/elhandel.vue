@@ -1,0 +1,413 @@
+<template>
+  <section v-editable="body" class="relative">
+    <div id="elbuy" class="absolute sr-only -top-32"></div>
+    <div class="lg:text-center max-w-5xl mx-auto px-4 sm:px-6 md:px-8">
+      <h2 class="text-lg text-primary font-semibold uppercase">
+        {{ body.headline }}
+      </h2>
+      <h3
+        class="mt-2 mb-5 text-4xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl"
+      >
+        {{ body.subtitle }}
+      </h3>
+
+      <div class="relative max-w-xs lg:mx-auto">
+        <input
+          :value="pnr"
+          @input="(e) => (pnr = e.target.value)"
+          type="text"
+          placeholder="XXXXXX-XXXX"
+          class="min-w-0 w-full mb-6 font-bold leading-5 px-4 py-3 text-gray-600 text-lg border-2 rounded-lg border-upink focus:outline-none focus:ring"
+        />
+        <transition name="fade">
+          <div v-if="loading" class="absolute top-5 right-4">
+            <div class="dot-bricks"></div>
+          </div>
+        </transition>
+      </div>
+
+      <client-only>
+        <transition name="fade">
+          <div
+            v-if="showOffers"
+            class="relative md:text-lg text-gray-600 lg:flex flex-col items-center"
+          >
+            {{ body.helpheading2 }}
+            <svg
+              class="-bottom-10 text-upink animate-bounce absolute w-6 h-6 text-amber-900"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+          </div>
+          <div v-else class="md:text-lg text-gray-600">
+            {{ body.helpheading1 }}
+          </div>
+        </transition>
+      </client-only>
+    </div>
+
+    <FancyWaves>
+      <collapse-transition>
+        <ul
+          id="plans"
+          v-show="showOffers"
+          class="max-w-4xl mx-auto pb-8 px-4 sm:px-6 md:px-8 w-full grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8"
+        >
+          <li
+            v-for="plan in plans"
+            :key="plan.id"
+            :class="{
+              'rotate-2 scale-105': plan.id == selectedPlanId,
+              'bg-gradient-to-tl from-gray-200 via-white to-white': plan.enabled,
+              'bg-gray-200': !plan.enabled,
+            }"
+            class="transform transition-transform rounded-lg shadow-lg p-4 sm:p-6"
+          >
+            <ElPlan
+              showSelect
+              @select="onSelected"
+              :usage="usage"
+              @change="usage = $event"
+              :plan="plan"
+              :selectedPlanId = selectedPlanId
+            />
+          </li>
+        </ul>
+      </collapse-transition>
+      <collapse-transition>
+        <div
+          v-show="showSignupForm"
+          class="max-w-4xl mx-auto pb-8 px-4 sm:px-6 md:px-8"
+        >
+          <FormulateForm
+            v-model="formData"
+            @submit="submitted"
+            #default="{ isLoading, hasErrors }"
+          >
+            <div
+              id="personal"
+              class="rounded-lg shadow-lg bg-gradient-to-tl from-gray-200 via-white to-white p-4 sm:p-8"
+            >
+              <h2 class="text-primary md:text-lg font-bold mb-2 uppercase">
+                Uppgifter för ditt nya elavtal
+              </h2>
+              <p class="text-sm sm:text-base text-gray-600 mb-4">
+                Observera att det är samma person som står på elnätsavtalet som
+                ska stå på elavtalet.
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-y-0 md:gap-x-8">
+                <FormulateInput
+                  ref="email"
+                  type="email"
+                  name="mail"
+                  label="E-post"
+                  validation="required|email"
+                />
+                <FormulateInput
+                  type="tel"
+                  name="tel"
+                  label="Telefon"
+                  validation="required"
+                />
+
+                <FormulateInput
+                  type="text"
+                  name="name"
+                  label="Förnamn"
+                  validation="required"
+                />
+                <FormulateInput
+                  type="text"
+                  name="surname"
+                  label="Efternamn"
+                  validation="required"
+                />
+              </div>
+              <div class="mt-6 md:mt-0 md:flex">
+                <FormulateInput
+                  class="md:mr-8"
+                  type="text"
+                  name="address"
+                  label="Adress"
+                  validation="required"
+                />
+                <FormulateInput
+                  class="md:mr-8"
+                  type="text"
+                  name="zip"
+                  label="Postnummer"
+                  validation="required"
+                />
+                <FormulateInput
+                  type="text"
+                  name="city"
+                  label="Ort"
+                  validation="required"
+                />
+              </div>
+            </div>
+            <div
+              class="mt-8 rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tl from-gray-200 via-white to-white"
+            >
+              <h2 class="text-primary sm:text-lg font-bold mb-2 uppercase">
+                Från när ska avtalet börja gälla?
+              </h2>
+              <p class="text-sm sm:text-base text-gray-600 mb-4">
+                Avtalet börjar gälla tidigast om 28 dagar
+              </p>
+              <FormulateInput
+                type="date"
+                name="startDate"
+                placeholder="Startdatum"
+                label="Startdatum för avtalet"
+                validation="required"
+                :validation-messages="{
+                  required: 'Du måste ange ett startdatum',
+                }"
+                :min="minDate"
+                :max="maxDate"
+                error-behavior="live"
+              />
+            </div>
+
+            <div
+              class="mt-8 rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tl from-gray-200 via-white to-white"
+            >
+              <h2 class="text-primary sm:text-xl font-bold mb-2 uppercase">
+                Ange Anläggnings-ID
+              </h2>
+              <p class="text-sm sm:text-base text-gray-600 mb-4">
+                Du kan ange ID eller låta oss hämta det. Anläggnings-id hittar du nånstans i din elcentral eller på en gammal faktura.
+                18 siffror och börjar av någon outgrundlig anledning med 735999
+              </p>
+              <FormulateInput
+                type="radio"
+                v-model="anlaggning"
+                name="anlaggning"
+                validation="required"
+                :options="[
+                  {
+                    value: 'manuellt',
+                    label: 'Ange ID',
+                    id: 'manuellt',
+                    disabled: false,
+                  },
+                  {
+                    value: 'automatiskt',
+                    label:
+                      'Jag ger Fake snake AB fullmakt att kontakta min nätägare och nuvarande elleverantör för att komplettera uppgifter om anläggnings-ID',
+                  },
+                ]"
+              />
+              <FormulateInput
+                type="text"
+                name="anlaggningsId"
+                placeholder="735999..."
+                label="Anläggnings-ID"
+                validation="matches:/^735999[0-9]{12}$/"
+                :validation-messages="{
+                  matches:
+                    'Anläggnings-ID ska bestå av 18 siffror och börja med 735999.',
+                }"
+                visible="false"
+                v-if="anlaggning == 'manuellt'"
+              />
+            </div>
+
+            <div
+              class="mt-8 rounded-lg shadow-lg p-4 sm:p-8 bg-gradient-to-tl from-gray-200 via-white to-white"
+            >
+              <h2 class="text-primary sm:text-xl font-bold mb-2 uppercase">
+                Faktureringsalternativ
+              </h2>
+              <p class="text-sm sm:text-base text-gray-600 mb-4">
+                Hur vill du bli fakturerad? För snabbast handläggning välj e-faktura eller e-post
+              </p>
+              <FormulateInput
+                type="radio"
+                name="invoice"
+                v-model="invoiceType"
+                validation="required"
+                :options="[
+                  { value: 'efaktura', label: 'E-faktura' },
+                  {
+                    value: 'email',
+                    label: 'E-post',
+                  },
+                  { value: 'sms', label: 'SMS' },
+                  { value: 'post', label: 'Post' },
+                ]"
+              />
+              <FormulateInput
+                type="select"
+                name="bank"
+                v-if="invoiceType == 'efaktura'"
+                label="Välj bank för e-faktura"
+                :options="{
+                  NB: 'Nordea',
+                  SWB: 'Swedbank och Sparbankerna',
+                  DBH: 'Danske Bank',
+                  FOB: 'Forex Bank',
+                  SHB: 'Handelsbanken',
+                  ICAB: 'ICA Banken',
+                  LFB: 'Länsförsäkringar Bank',
+                  MAB: 'Marginalen Bank',
+                  SEB: 'SEB',
+                  SBN: 'Skandiabanken',
+                  SBS: 'Sparbanken Syd',
+                  SVB: 'Svea Bank',
+                  AAL: 'Ålandsbanken',
+                }"
+              />
+              <div></div>
+
+              <simple-button
+                class="w-full md:w-auto"
+                rounded
+                primary
+                :disabled="isLoading || hasErrors"
+                type="submit"
+              >
+                {{ isLoading ? "Bearbetar..." : "Slutför beställning" }}
+              </simple-button>
+            </div>
+          </FormulateForm>
+        </div>
+      </collapse-transition>
+    </FancyWaves>
+
+    <confirm-sign
+      :visible="confirmationModal"
+      @close="handleConfirmation"
+      :title="body.confirmaitionheading"
+      :toSign="formData"
+      :pnr="pnr"
+    >
+    </confirm-sign>
+  </section>
+</template>
+
+<script>
+import { info } from "@/services/person.service";
+import elPlan from "./elPlan.vue";
+
+export default {
+  components: { elPlan },
+  props: {
+    body: {
+      type: Object,
+      required: true,
+    },
+  },
+  data: () => ({
+    confirmationModal: false,
+    loading: false,
+    showOffers: false,
+    showSignupForm: false,
+    selectedPlanId: null,
+    pnr: "",
+    minDate: new Date().addDays(28).toISOString().slice(0, 10),
+    maxDate: new Date()
+      .addDays(30 * 14)
+      .toISOString()
+      .slice(0, 10),
+    anlaggning: "manuellt",
+    anlaggningsId: "",
+    invoiceType: "",
+    usage: 14000,
+
+    formData: {},
+  }),
+  computed: {
+    plans() {
+      return this.$store.state.deals.deals;
+    },
+    revealText() {
+      return this.isValidPnr
+        ? "Visa personliga erbjudanden"
+        : this.isValidPostNbr
+        ? "Visa erbjudanden för mitt område"
+        : "";
+    },
+    isValidPnr() {
+      return /^(19|20)?(\d{6}([-+]|\s)\d{4}|(?!19|20)\d{10})$/.test(this.pnr);
+    },
+    isValidPostNbr() {
+      return /^\d{3} \d{2}$/.test(this.pnr);
+    },
+    isAny() {
+      return this.isValidPnr || this.isValidPostNbr;
+    },
+  },
+  watch: {
+    formData() {},
+    isAny(value) {
+      if (this.isValidPnr) {
+        this.getPerson(this.pnr);
+      } else {
+        this.showOffers = false;
+        this.showSignupForm = false;
+      }
+    },
+  },
+
+  mounted() {},
+  methods: {
+    submitted(data) {
+      this.confirmationModal = true;
+      console.log(data);
+    },
+    handleConfirmation() {
+      this.confirmationModal = false;
+    },
+    getPerson(pnr) {
+      this.loading = true;
+      info(pnr, true)
+        .then((res) => {
+          console.info("personal stuff", res.data);
+          this.setInitialForm(res.data);
+          this.loading = false;
+          this.showOffers = true;
+          setTimeout(() => {
+            const cancelScroll = this.$scrollTo("#plans", 300, {
+              offset: -200,
+            });
+          }, 300);
+        })
+        .catch((e) => {
+          console.warn("failed to get personal stuff - using fake");
+          this.loading = false;
+          this.showOffers = true;
+          setTimeout(() => {
+            const cancelScroll = this.$scrollTo("#plans", 300, {
+              offset: -200,
+            });
+          }, 300);
+        });
+    },
+    setInitialForm(data) {
+      this.formData = {
+        name: data.firstName,
+        surname: data.lastName,
+        address: data.registrationAddress.streetName,
+        zip: data.registrationAddress.zipCode,
+        city: data.registrationAddress.city,
+        startDate: new Date().addDays(28).toISOString().slice(0, 10),
+      };
+    },
+    onSelected(plan) {
+      this.selectedPlanId = plan.id;
+      this.showSignupForm = true;
+      setTimeout(() => {
+        const cancelScroll = this.$scrollTo("#personal", 300, { offset: -200 });
+      }, 300);
+    },
+  },
+};
+</script>

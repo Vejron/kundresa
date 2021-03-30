@@ -7,11 +7,10 @@
 
   .formulate-input-label {
     display: block;
-    color: $formulate-gray-dddd;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    font-weight: 600;
-    margin-bottom: .25em;
+    
+    font-size: 1rem;
+    line-height: 1.5rem;
+    
 
     &--before + .formulate-input-help--before {
       margin-top: -.25em;

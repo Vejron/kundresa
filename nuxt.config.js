@@ -45,6 +45,7 @@ export default {
     '~/components/molecules',
     '~/components/layout',
     '~/components/sections',
+    '~/components/showcase',
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules

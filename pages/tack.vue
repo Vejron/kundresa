@@ -1,15 +1,22 @@
 <template>
-  <section class="max-w-5xl mx-auto mb-8 mt-8 px-6 md:px-8 h-screen prose prose-lg">
-    <h1>Tack!</h1>
-    <p>Det här gick ju bra. här ska det stå en massa tack och böj</p>
-    <p>vi har skickat en bekräftelse till dig på <span class="text-green-600">xxx@xxx.se</span></p> 
-    <simple-button @click="$router.push('/')" primary rounded>Tillbaka till start</simple-button>
+  <section
+    class="max-w-2xl text-center mx-auto mb-8 mt-8 px-6 md:px-8 h-screen/2 prose prose-md  md:prose-lg"
+  >
+    <h1>Tack för förtroendet!</h1>
+    <p>
+      Det här gick ju bra. Med lite flyt bör det komma en skriftlig bekräftelse
+      via mail till den adress du angav vid beställningen. Vi har skickat 
+      bekräftelsen till <span class="text-green-600">xxx@xxx.se</span>
+    </p>
+    <simple-button @click="$router.push('/')" primary rounded
+      >Tillbaka till start</simple-button
+    >
   </section>
 </template>
 
 <script>
 export default {
-  layout: "simple",
+  //layout: "simple",
   data: () => ({
     values: {},
     plan: {},
