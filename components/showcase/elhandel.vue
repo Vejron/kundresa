@@ -95,7 +95,7 @@
               class="rounded-lg shadow-lg bg-gradient-to-tl from-gray-200 via-white to-white p-4 sm:p-8"
             >
               <h2 class="text-primary md:text-lg font-bold mb-2 uppercase">
-                Uppgifter för ditt nya elavtal
+                Uppgifter för ditt nya <span class="text-upink underline">rörliga</span> elavtal
               </h2>
               <p class="text-sm sm:text-base text-gray-600 mb-4">
                 Observera att det är samma person som står på elnätsavtalet som
