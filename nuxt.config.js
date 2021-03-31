@@ -29,7 +29,7 @@ export default {
     '~/plugins/dynamic-components',
     '~/plugins/vuetensils.client',
     '~/plugins/vue-formulate',
-    '~/plugins/vue-datetime',
+    '~/plugins/typed',
     '~/plugins/gtag-plugin.client',
     '~/plugins/crisp.client',
     '~/plugins/storyblok-rich-text-renderer',

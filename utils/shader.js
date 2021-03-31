@@ -432,8 +432,6 @@ export default class ShaderProgram {
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE)
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
 
-      // gl.generateMipmap( gl.TEXTURE_2D )
-
     }
 
     textureImage.src = src
@@ -452,7 +450,7 @@ export default class ShaderProgram {
     this.uniforms.time = elapsed
 
     if ( this.count > 0 ) {
-      gl.clear( gl.COLORBUFFERBIT )
+      gl.clear( gl.COLOR_BUFFER_BIT )
       gl.drawArrays( gl.POINTS, 0, this.count )
     }
 
