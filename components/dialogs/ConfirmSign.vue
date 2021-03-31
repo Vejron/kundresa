@@ -9,18 +9,17 @@
         - väljer att signera avtalet tar vi över leveransen av el till
         <span class="text-primary font-semibold">{{ toSign.address }}</span> den
         <span class="text-primary font-semibold">{{ toSign.startDate }}</span
-        >. Fakturering kommer att ske via
+        >. Fakturering kommer att ske månadsvis via
         <span class="text-primary font-semibold">{{ toSign.invoice }}</span>
-        månadsvis.
       </p>
       <p class="text-sm md:text-base text-gray-600">
-        Se för
+        Se
         <a
           class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
           href="https://google.com"
           >länk</a
         >
-        fullständiga avtalsvilkor
+        för fullständiga avtalsvilkor
       </p>
     </div>
 
@@ -181,7 +180,7 @@ export default defineComponent({
 <style lang="postcss" scoped>
 .scrollable {
   height: 300px;
-  max-height: 20vh;
+  max-height: 30vh;
   overflow-y: auto;
 }
 </style>
