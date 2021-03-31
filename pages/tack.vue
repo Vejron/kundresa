@@ -3,11 +3,15 @@
     class="max-w-2xl text-center mx-auto mb-8 mt-8 px-6 md:px-8 h-screen/2 prose prose-md  md:prose-lg"
   >
     <h1>Tack för förtroendet!</h1>
-    <p>
-      Det här gick ju bra. Med lite flyt bör det komma en skriftlig bekräftelse
+    
+      <vue-typed-js v-if="values" :cursorChar="'_'" :startDelay="400" :typeSpeed="50" :strings="['John Doe', values.UserAttributes.FullName]">
+    <p style="margin-top: 0">
+      Det här gick ju bra <span class="typing text-upink"></span>. Med lite flyt bör det komma en skriftlig bekräftelse
       via mail till den adress du angav vid beställningen. Vi har skickat 
       bekräftelsen till <span class="text-green-600">xxx@xxx.se</span>
     </p>
+    </vue-typed-js>
+    
     <simple-button @click="$router.push('/')" primary rounded
       >Tillbaka till start</simple-button
     >
@@ -18,7 +22,7 @@
 export default {
   //layout: "simple",
   data: () => ({
-    values: {},
+    values: null,
     plan: {},
     usage: 0,
   }),

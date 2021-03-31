@@ -9,18 +9,16 @@
     <main
       class="star-wars relative mx-auto max-w-7xl px-4 lg:px-8 h-100 flex items-center justify-center"
     >
-      <div class="crawl text-center">
-        
-
+      <div class="text-center">
         <h1 class="tracking-normal font-bold text-white">
           <p class="text-2xl sm:text-3xl md:text-6xl sm:mb-2">
             {{ body.headline }}
           </p>
-          <vue-typed-js :startDelay="2000" :typeSpeed="50" :strings="['Här behövs det en klyschig tagline på sisådär en 40 tecken', body.subheading]">
+          <vue-typed-js :cursorChar="'_'" :startDelay="2000" :typeSpeed="50" :strings="['Här behövs det en klyschig tagline på sisådär en 40 tecken', body.subheading]">
             <p
-              class="typing text-lg sm:text-xl md:text-3xl font font-semibold text-secondary"
+              class="text-lg sm:text-xl md:text-3xl font font-semibold text-secondary"
             >
-              
+              <span class="typing"></span>
             </p>
           </vue-typed-js>
         </h1>

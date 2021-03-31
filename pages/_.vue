@@ -82,6 +82,15 @@ export default {
       context.store.commit('articles/setArticles', articlesRefRes.data.stories)
       context.store.commit('articles/setLoaded', '1')
     }
+
+    // links for breadcrumbs, sitemap...
+    if(context.store.state.links.loaded !== '1') {
+
+      let linksRefRes = await context.app.$storyapi.get(`cdn/links/`, { version: 'draft' })
+      //console.warn('SDDDDDDDDDDDDDDDDDDsdsdds!!!!!!!!', linksRefRes.data.links);
+      context.store.commit('links/setLinks', linksRefRes.data.links)
+      context.store.commit('links/setLoaded', '1')
+    }
   },
 }
 </script>
