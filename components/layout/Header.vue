@@ -175,10 +175,8 @@ export default {
 
 /* som fancy animations */
 .top-link {
-
-  background:
-    linear-gradient(rgb(0, 127, 50) 0 0) var(--p, -101%) 100% /50% 2.5px no-repeat,
-    linear-gradient(90deg, rgb(0, 127, 50) 50%, transparent 0) bottom /var(--d, 0) 2.5px no-repeat;
+  background: linear-gradient(rgb(0, 127, 50) 0 0) var(--p, -101%) 100% / 50% 2.5px no-repeat,
+    linear-gradient(90deg, rgb(0, 127, 50) 50%, transparent 0) bottom / var(--d, 0) 2.5px no-repeat;
   transition: 0.3s, background-size 0.3s 0.3s;
 }
 .top-link:hover,

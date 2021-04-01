@@ -14,11 +14,11 @@ export default defineComponent({
    
       const path = root.$route.path;
       const links = root.$store.state.links.links;
-      console.log("route", path);
-      console.log("store", links);
+      //console.log("route", path);
+      //console.log("store", links);
 
       const item = Object.values(links).find((item) => item.real_path === path);
-      console.log("store", item);
+      //console.log("store", item);
   
 
     const not = item.name;

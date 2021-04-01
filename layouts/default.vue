@@ -2,8 +2,8 @@
   <div class="bg-white overflow-x-hidden">
     <Header />
     <Nuxt />
-    <Footer />
-    <BottomNav />
+    <Footer2 />
+    <BottomNav2 />
     <Consent />
     <portal-target name="modal"/>
   </div>

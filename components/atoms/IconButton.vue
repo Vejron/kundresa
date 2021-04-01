@@ -1,5 +1,5 @@
 <template>
-  <component :to="to" :is="isAnchor ? 'nuxt-link' : 'button'" class="flex flex-col items-center">
+  <component @click="click" :to="to" :is="isAnchor ? 'nuxt-link' : 'button'" :class="classes" class="focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 flex   items-center">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -8,7 +8,7 @@
       :height="size"
       viewBox="0 0 24 24"
     >
-      <path fill="rgba(0,0,0, 0.51)" :d="icon" />
+      <path :d="icon" />
     </svg>
     <slot></slot>
   </component>
@@ -19,6 +19,7 @@ import { defineComponent, computed } from '@vue/composition-api'
 
 export default defineComponent({
   props: {
+    fab: Boolean,
     icon: {
       type: String,
       required: true,
@@ -39,10 +40,24 @@ export default defineComponent({
       default: false,
     },
   },
-  setup(props) {
+  setup(props, {emit}) {
+    
     const isAnchor = computed(() => props.to !== undefined);
+    
+    const classes = computed(() => {
+      return [
+        { "p-3 rounded-full bg-secondary shadow-lg": props.fab },
+        ];
+    });
+
+    const click = (e) => {
+      emit("click", e)
+    }
+
     return {
-      isAnchor
+      isAnchor,
+      classes,
+      click,
     }
   },
 })
