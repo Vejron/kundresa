@@ -12,25 +12,31 @@
         class="relative left-3 bottom-3 z-40"
         fab
         size="30"
-        :icon="isOpen? mdiClose: mdiMenu"
+        :icon="isOpen ? mdiClose : mdiMenu"
       >
         <span class="sr-only"> Meny </span>
       </icon-button>
 
-      <transition name="slide-left"> 
-      <ul
-        v-if="isOpen"
-        id="bottom-nav-menu"
-        class="px-2 pt-4 flex flex-col bg-gradient-to-tl from-gray-300 to-white fixed top-0 left-0 w-full h-full"
-      >
-        <li @click="drawer" v-for="link in shortcuts" :key="link.name">
-          <icon-button class="px-3 py-1" :to="link.url" size="30" :icon="link.icon">
-            <span class="ml-2 font-light whitespace-nowrap">
-              {{ link.name }}
-            </span>
-          </icon-button>
-        </li>
-      </ul>
+      <transition name="slide-left">
+        <ul
+          v-if="isOpen"
+          id="bottom-nav-menu"
+          class="px-2 pt-4 flex flex-col bg-gradient-to-tl from-gray-300 to-white fixed top-0 left-0 w-full h-full"
+        >
+          <li @click="drawer" v-for="link in shortcuts" :key="link.name">
+            <icon-button
+              class="px-3 py-1 bottom-link font-light"
+              :to="link.url"
+              size="30"
+              :icon="link.icon"
+            >
+              <span class="ml-2 whitespace-nowrap">
+                {{ link.name }}
+              </span>
+              <span class="strike-line"></span>
+            </icon-button>
+          </li>
+        </ul>
       </transition>
     </nav>
   </div>
@@ -49,14 +55,9 @@ import {
   mdiViewGridPlus,
   mdiFlashOutline,
   mdiWifi,
-  mdiThermometer
+  mdiThermometer,
 } from "@mdi/js";
-import {
-  defineComponent,
-  computed,
-  ref,
-  onMounted,
-} from "@vue/composition-api";
+import { defineComponent, ref, onMounted } from "@vue/composition-api";
 
 export default defineComponent({
   setup() {
@@ -91,9 +92,9 @@ export default defineComponent({
         url: "/products",
       },
       {
-        name: "Distrubution",
+        name: "Elnät",
         icon: mdiViewGridPlus,
-        url: "/products",
+        url: "/elnat",
       },
       {
         name: "Elhandel",
@@ -138,7 +139,13 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style scoped lang="postcss">
+.bottom-link.nuxt-link-exact-active {
+  @apply text-primary font-semibold;
+}
+.bottom-link.nuxt-link-exact-active .strike-line {
+  @apply ml-2 h-0.5 flex-grow bg-gradient-to-r from-primary via-transparent to-secondary;
+}
 @media (max-height: 500px) {
   nav {
     display: none;

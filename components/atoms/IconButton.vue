@@ -1,5 +1,5 @@
 <template>
-  <component @click="click" :to="to" :is="isAnchor ? 'nuxt-link' : 'button'" :class="classes" class="focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 flex   items-center">
+  <component @click="click" :to="to" :is="isAnchor ? 'nuxt-link' : 'button'" :class="classes" class="focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 flex items-center">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"

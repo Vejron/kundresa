@@ -1,5 +1,5 @@
 <template>
-  <section v-editable="body" class="prose prose-sm prose-green ">
+  <section v-editable="body" class="prose prose-sm lg:prose-lg prose-green ">
     <rich-text-renderer :document="body.body" />
   </section>
 </template>
