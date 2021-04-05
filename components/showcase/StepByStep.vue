@@ -7,8 +7,8 @@
           class="flex flex-row-reverse md:flex-row w-full mb-6"
         >
           <div class="md:w-1/2">
-            <h2 class="flex-1 font-medium">{{ step.title }}</h2>
-            <div class="">{{ step.description }}</div>
+            <h2 class="flex-1 text-lg leading-tight mt-1 ml-3 md:ml-0 md:mr-3 mb-3 font-medium">{{ step.title }}</h2>
+            <div class="ml-3 md:ml-0 md:mr-3">{{ step.description }}</div>
           </div>
           <div class="flex-none flex-col">
             <div
@@ -36,7 +36,7 @@
             ></div>
           </div>
           <div class="md:w-1/2">
-            <h2 class="flex-1 text-lg leading-8 ml-3 mb-3 font-medium">{{ step.title }}</h2>
+            <h2 class="flex-1 text-lg leading-tight mt-1 ml-3 mb-3 font-medium">{{ step.title }}</h2>
             <div class="ml-3">{{ step.description }}</div>
           </div>
         </div>
