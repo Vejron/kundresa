@@ -56,6 +56,7 @@
             </transition>
           </div>
         </simple-button>
+       
         <simple-button
           class="flex-shrink hidden sm:block"
           secondary
@@ -67,7 +68,9 @@
         </simple-button>
       </div>
       <collapse-transition>
-        <simple-alert v-if="signError" @close="signError = false" class="mt-6">Något gick fel..</simple-alert>
+        <simple-alert v-if="signError" @close="signError = false" class="mt-6"
+          >Något gick fel..</simple-alert
+        >
       </collapse-transition>
     </FormulateForm>
   </base-modal>
@@ -136,6 +139,15 @@ export default defineComponent({
     const sign = async (data) => {
       try {
         console.log(data);
+        if (
+          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent
+          )
+        ) {
+          // true for mobile device. try to open bankid directly
+          window.open("https://app.bankid.com/?redirect=null");
+        }
+        
         const res = await esign({ pnr: data.pnr, tosign: props.toSign });
         console.log("got it", res.data);
         theEnd(res.data);
@@ -148,7 +160,7 @@ export default defineComponent({
         }, 2000);
       }
     };
-  
+
     const formData = reactive({
       pnr: "",
       consent: true,
