@@ -43,18 +43,18 @@ export async function infoMotala(pnr) {
 191603019876
  */
 
-export async function info(personalIdentityNumber, mock) {
-  if(mock) {
+export async function info(personalIdentityNumber) {
+  if(personalIdentityNumber === "7911068513") {
     const res = {
       data: {
-        firstName: "John",
-        lastName: "Doe",
+        firstName: "Björn",
+        lastName: "Yttergren",
         customerType: "PRIVATE",
         region: "SE2", // SE1, SE2, SE3, SE4
         registrationAddress: {
-          streetName: "Ballefjonggatan 7",
+          streetName: "Pastorsvägen 10",
           city: "Umeå",
-          zipCode: "903 66"
+          zipCode: "903 62"
         }
       }
     }

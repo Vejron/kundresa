@@ -370,7 +370,7 @@ export default {
     },
     getPerson(pnr) {
       this.loading = true;
-      info(pnr, true)
+      info(pnr)
         .then((res) => {
           console.info("personal stuff", res.data);
           this.setInitialForm(res.data);

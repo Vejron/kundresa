@@ -2,7 +2,7 @@
   <portal to="modal">
     <transition appear name="fade">
       <div
-        class="fixed z-50 bottom-0 inset-x-0 px-4 pb-4 sm:inset-0 sm:flex sm:items-center sm:justify-center"
+        class="fixed z-50 top-0 inset-x-0 px-4 pt-4 sm:inset-0 sm:flex sm:items-center sm:justify-center"
       >
         <div class="fixed inset-0 transition-opacity">
           <div
