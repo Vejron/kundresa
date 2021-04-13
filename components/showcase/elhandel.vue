@@ -196,9 +196,9 @@
                     value: 'manuellt',
                     label: 'Ange ID',
                     id: 'manuellt',
-                    disabled: false,
                   },
                   {
+                    disabled: true,
                     value: 'automatiskt',
                     label:
                       'Jag ger Fake snake AB fullmakt att kontakta min nätägare och nuvarande elleverantör för att komplettera uppgifter om anläggnings-ID',
@@ -296,6 +296,8 @@
 <script>
 import { info } from "@/services/person.service";
 import elPlan from "./elPlan.vue";
+
+// mitt id 735 999 101 100 208 214
 
 export default {
   components: { elPlan },
