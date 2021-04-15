@@ -155,9 +155,9 @@ export default defineComponent({
       } catch (error) {
         signError.value = true;
         console.warn("failed to sign");
-        setTimeout(() => {
-          theEnd({});
-        }, 2000);
+        //setTimeout(() => {
+        //  theEnd({});
+        //}, 2000);
       }
     };
 
