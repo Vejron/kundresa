@@ -26,7 +26,7 @@
             'transform': 'rotate3D(0, 0, 1,' + (Math.random() - 0.5) * 6 + 'deg)',
           }"
           :class="{
-            'col-span-2': i === 3 || i === 6,
+            'col-span-2': i === 1 || i === 2 || i === 5,
             'gradient-cover md:bg-fixed': window.exists,
           }"
           class="shadow-md h-32 lg:h-42 rounded-md flex justify-center items-center text-white text-2xl lg:text-4xl font-extrabold"
@@ -62,10 +62,7 @@ export default {
       {
         exists: false,
       },
-      {
-        exists: false,
-      },
-      {
+       {
         exists: true,
         title: "Fjärrvärme",
         url: "#Fjärrvärme",
@@ -73,9 +70,11 @@ export default {
       {
         exists: false,
       },
+     
       {
         exists: false,
       },
+      
       {
         exists: true,
         title: "Bredband",
