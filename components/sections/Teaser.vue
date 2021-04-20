@@ -43,12 +43,12 @@
                 </a>
               </div>
               <div class="mt-3 sm:mt-0 sm:ml-3">
-                <a
-                  :href="body.button2_url.url"
+                <nuxt-link
+                  :to="'/' + body.button2_url.cached_url"
                   class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-primary bg-secondary-80 hover:bg-secondary md:py-4 md:text-lg md:px-10"
                 >
                    {{body.button2_text}}
-                </a>
+                </nuxt-link>
               </div>
             </div>
           </div>

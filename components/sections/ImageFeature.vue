@@ -27,7 +27,7 @@
         {{ body.subheading }}
       </p>
 
-      <div class="prose prose-md">
+      <div class="prose prose-md prose-green">
         <rich-text-renderer :document="body.description" />
       </div>
     </article>
