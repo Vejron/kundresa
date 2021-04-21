@@ -32,6 +32,10 @@ module.exports = {
         yellow: colors.amber,
         blue: colors.blue,
         pink: colors.pink,
+        purple: colors.purple,
+        fuchsia: colors.fuchsia,
+        indigo: colors.indigo,
+
         primary: {
           DEFAULT: '#007f32',
           80: '#33995b',

@@ -5,11 +5,18 @@
       @submit="submitHandler"
       #default="{ isLoading, hasErrors }"
     >
-      <h2 class="text-2xl md:text-4xl font-bold mb-8">{{body.title}}</h2>
-      <div class="prose prose-sm sm:prose lg:prose-lg mb-8">
-         <rich-text-renderer :document="body.description" />
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl md:text-4xl font-bold">{{ body.title }}</h2>
+        <story-image
+          class="hidden sm:block w-40 object-cover"
+          :image="body.image"
+        />
       </div>
-     
+
+      <div class="prose md:prose-lg">
+        <rich-text-renderer :document="body.description" />
+      </div>
+
       <template v-for="body in body.inputs">
         <template v-if="body.component === 'input-field'">
           <FormulateInput
@@ -36,11 +43,21 @@
         />
       </div>
     </FormulateForm>
+    <base-modal
+      v-if="dialog"
+      title="Formuläret skickat!"
+    >
+      <p class="text-sm leading-5 text-gray-600">
+        {{ body.thankyou }}
+      </p>
+      <template v-slot:footer>
+        <simple-button secondary rounded @click="dialog = false">
+          Okej
+        </simple-button>
+      </template>
+    </base-modal>
     <client-only>
-    <VDialog v-model="dialog" bg-transition="fade" class="my-dialog">
-      <p class="mb-4">{{body.thankyou}}</p>
       
-    </VDialog>
     </client-only>
   </div>
 </template>
@@ -54,7 +71,7 @@ export default {
     },
   },
   data: () => ({
-    dialog: false
+    dialog: false,
   }),
   methods: {
     async submitHandler(data) {
@@ -72,7 +89,7 @@ export default {
       }).then(() => {
         setTimeout(() => {
           this.dialog = false;
-        }, 1000);
+        }, 5000);
       });
     },
   },

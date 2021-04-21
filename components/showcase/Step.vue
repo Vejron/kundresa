@@ -4,7 +4,7 @@
       {{ body.title }}
     </h2>
 
-    <div class="ml-3 prose-sm  md:prose xl:prose-xl">
+    <div class="ml-3 prose prose-sm md:prose xl:prose-xl">
       <rich-text-renderer :document="body.description" />  
     </div>
   </div>
