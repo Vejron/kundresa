@@ -297,8 +297,6 @@
 import { info } from "@/services/person.service";
 import elPlan from "./elPlan.vue";
 
-// mitt id 735 999 101 100 208 214
-
 export default {
   components: { elPlan },
   props: {

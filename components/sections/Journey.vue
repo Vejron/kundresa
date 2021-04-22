@@ -290,7 +290,6 @@
 </template>
 
 <script>
-import debounce from "lodash/debounce";
 import { info } from "@/services/person.service";
 
 export default {

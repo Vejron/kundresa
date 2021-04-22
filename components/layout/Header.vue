@@ -20,11 +20,12 @@
       <div class="border-gray-200 border-b"></div>
 
       <div class="max-w-7xl mx-auto lg:px-4">
-        <div class="navigation-bar text-lg flex justify-between h-16">
+        <div class="navigation-bar text-lg flex justify-between items-center h-16">
           <nuxt-link to="/" class="flex items-center pl-2">
             <Logo class="h-10 logo"/>
-            <span class="top-link font-medium ml-2">Fake snake AB</span>
+            <span class="hidden xl:inline top-link font-medium ml-2">Fake snake AB</span>
           </nuxt-link>
+          <auto-complete placeholder="Sök på sidan..." class="mr-4 w-52 lg:w-64 md:mr-0"></auto-complete>
           <ul class="hidden md:flex items-center">
             <li class="px-4 flex-grow-0 flex-shrink-0" v-for="link in topLinks" :key="link.name">
               <nuxt-link
@@ -88,12 +89,9 @@ export default {
         search_term: searchInput,
         per_page: 5,
       });
-
       return data.stories;
     },
-    onClickoutMenu() {
-      this.showMobile = false;
-    },
+  
     onScroll() {
       const currentScrollPosition = window.pageYOffset;
       this.showShadow = !!currentScrollPosition;
