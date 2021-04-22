@@ -27,7 +27,6 @@ export default {
   plugins: [
     '~/plugins/composition-api',
     '~/plugins/dynamic-components',
-    '~/plugins/vuetensils.client',
     '~/plugins/vue-formulate',
     '~/plugins/typed',
     '~/plugins/gtag-plugin.client',

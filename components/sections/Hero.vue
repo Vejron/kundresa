@@ -31,16 +31,20 @@
           }"
           class="shadow-md h-32 lg:h-42 rounded-md flex justify-center items-center text-white text-2xl lg:text-4xl font-extrabold"
         >
-          <a
-            class="absolute p-12"
-            v-if="window.exists"
-            :href="window.url"
-          >
+          
+          <nuxt-link class="absolute p-12" v-if="window.exists" :to="window.url">
             {{ window.title }}
-          </a>
+          </nuxt-link>
         </div>
       </div>
     </div>
+    <animated-nbr
+      :value="300"
+      :round="1"
+      :delay="4000"
+      :duration="3000"
+      
+    />
   </header>
 </template>
 
@@ -60,7 +64,9 @@ export default {
         url: "#Elhandel",
       },
       {
-        exists: false,
+        exists: true,
+        title: "Elnät",
+        url: "/elnat",
       },
        {
         exists: true,
