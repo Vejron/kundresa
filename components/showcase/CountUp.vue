@@ -1,5 +1,6 @@
 <template>
 <div>
+  <span></span>
    <animated-nbr
       :value="300"
       :round="1"
