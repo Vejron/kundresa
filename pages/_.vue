@@ -31,19 +31,7 @@ export default {
       })
     })
   },
-  head() {
-    return {
-      title: 'Våra erbjudanden',
-      meta: [
-        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
-        {
-          hid: "description",
-          name: "description",
-          content: "Bli kund hos snake energy elbolag",
-        },
-      ],
-    };
-  },
+  
   asyncData (context) {
     // // This what would we do in real project
     // const version = context.query._storybody || context.isDev ? 'draft' : 'published'

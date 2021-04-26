@@ -11,6 +11,7 @@
     >
       <div class="text-center">
         <h1 class="tracking-normal font-bold text-white">
+
           <p class="text-2xl sm:text-3xl md:text-6xl sm:mb-2">
             {{ body.headline }}
           </p>
