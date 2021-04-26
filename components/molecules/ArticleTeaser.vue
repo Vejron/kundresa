@@ -4,14 +4,7 @@
     class="transition duration-200 hover:shadow-xl block rounded-md overflow-hidden"
   >
     <div class="relative">
-      <img
-        class="h-64 overflow-hidden"
-        :src="image"
-        width="1000"
-        height="550"
-        
-        alt="random teaser image"
-      />
+      <story-image class="w-full object-cover max-h-56" :image="articleContent.image" />
 
       <div
         class="absolute top-0 bg-gradient-to-bl from-transparent to-gray-800 opacity-75 w-full h-full"
@@ -39,10 +32,14 @@ export default {
       required: true,
     },
   },
-  computed: {
-    image() {
-      return this.articleContent?.image?.filename;
-    }
-  }
 };
 </script>
+
+<style scoped>
+.line-clamp-6 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+}
+</style>
