@@ -22,7 +22,7 @@
       <div class="max-w-7xl mx-auto lg:px-4">
         <div class="navigation-bar text-lg flex justify-between items-center h-16">
           <nuxt-link to="/" class="flex items-center pl-2">
-            <Logo class="h-10 logo"/>
+            <Logo class="h-10 logo" aria-hidden="true"/>
             <span class="hidden xl:inline top-link font-medium ml-2">Fake snake AB</span>
           </nuxt-link>
           <auto-complete placeholder="Sök på sidan..." class="mr-4 w-52 lg:w-64 md:mr-0"></auto-complete>

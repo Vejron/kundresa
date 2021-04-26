@@ -57,6 +57,8 @@
       >
         <img
           class="w-full h-full object-cover object-left"
+          width="600"
+          height="350"
           src="https://source.unsplash.com/featured/600x350/?mail,newsletter"
           alt=""
         />
