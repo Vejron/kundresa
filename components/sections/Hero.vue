@@ -23,7 +23,7 @@
           :key="i"
           :style="{
             'background-image': 'url(' + body.image.filename + ')',
-            'transform': 'rotate3D(0, 0, 1,' + (Math.random() - 0.5) * 6 + 'deg)',
+            'transform': 'rotate3D(0, 0, 1,' + (0.5 - i % 2) * 3 + 'deg)',
           }"
           :class="{
             'col-span-2': i === 1 || i === 2 || i === 5,
