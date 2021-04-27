@@ -21,7 +21,7 @@
 
       <div class="max-w-7xl mx-auto lg:px-4">
         <div class="navigation-bar text-lg flex justify-between items-center h-16">
-          <nuxt-link to="/" class="flex items-center pl-2">
+          <nuxt-link aria-label="hem" to="/" class="flex items-center pl-2">
             <Logo class="h-10 logo" aria-hidden="true"/>
             <span class="hidden xl:inline top-link font-medium ml-2">Fake snake AB</span>
           </nuxt-link>

@@ -1,12 +1,12 @@
 <template>
-  <div v-editable="body">
+  <main v-editable="body">
     <component
       v-for="body in body.body"
       :key="body._uid"
       :body="body"
       :is="body.component"
     />
-  </div>
+  </main>
 </template>
 
 <script>

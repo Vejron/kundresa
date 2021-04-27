@@ -3,9 +3,9 @@
     <div
       class="bg-white autocomplete flex items-center border border-gray-300 focus-within:ring-primary focus-within:ring-2 rounded-lg overflow-hidden"
       role="combobox"
-      aria-haspopup="listbox"
+      aria-haspopup="true"
       aria-owns="autocomplete-results"
-      :aria-expanded="isOpen"
+      :aria-expanded="isOpen.toString()"
     >
       <svg
         aria-hidden="true"

@@ -13,7 +13,7 @@
           {{ body.citation }}
         </div>
         <div class="flex flex-col items-start font-medium">
-          <p style="color: rgb(8, 145, 178)">
+          <p style="color: rgb(4, 125, 158)">
             {{ body.name }}
           </p>
           <p style="color: rgb(113, 113, 122)">
