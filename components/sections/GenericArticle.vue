@@ -7,7 +7,8 @@
       <bread-crumb></bread-crumb>
       <h1>{{ body.name }}</h1>
       <story-image
-        class=" inset-y-0 w-full object-cover"
+        classes="w-full object-cover"
+        size="0x600"
         :image="body.image"
       />
       <p class="lead">{{ body.intro }}</p>

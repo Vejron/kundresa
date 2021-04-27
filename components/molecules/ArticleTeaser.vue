@@ -4,7 +4,7 @@
     class="transition duration-200 hover:shadow-xl block rounded-md overflow-hidden"
   >
     <div class="relative">
-      <story-image class="w-full object-cover max-h-56" :image="articleContent.image" />
+      <story-image classes="w-full object-cover max-h-56" size="0x300" :image="articleContent.image" />
 
       <div
         class="absolute top-0 bg-gradient-to-bl from-transparent to-gray-800 opacity-75 w-full h-full"

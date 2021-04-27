@@ -64,11 +64,9 @@
             v-if="body.splashImage"
             class="absolute h-96 w-1/3 transform-gpu translate-y-32 md:translate-y-0 rotate-6 -top-3 right-0 rounded-lg"
           >
-            <img
-              :src="body.splashImage.filename"
-              :alt="body.splashImage.alt"
-              class="absolute max-w-none object-contain"
-              style="width: 100%; height: 100%; left: 0px; top: 0px"
+            <story-image
+              classes="absolute max-w-none w-full h-full left-0 top-0 object-contain"
+              :image="body.splashImage"
             />
           </div>
         </div>

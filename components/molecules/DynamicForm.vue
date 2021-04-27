@@ -8,7 +8,7 @@
       <div class="flex items-center justify-between">
         <h2 class="text-2xl md:text-4xl font-bold">{{ body.title }}</h2>
         <story-image
-          class="hidden sm:block w-40 object-cover"
+          classes="hidden sm:block w-40 object-cover"
           :image="body.image"
         />
       </div>

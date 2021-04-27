@@ -1,7 +1,7 @@
 <template>
   <div v-editable="body" class="relative">
     <div class="absolute inset-0">
-      <story-image class="object-cover h-full w-full" :image="body.image" />
+      <story-image classes="object-cover h-full w-full" :image="body.image" />
       <div
         class="absolute particles top-0 bg-gradient-to-b from-transparent to-black h-full w-full"
       ></div>
@@ -35,10 +35,8 @@
 
 
 <script>
-import StoryImage from "@/components/atoms/StoryImage";
 import ShaderProgram from "@/utils/shader";
 export default {
-  components: { StoryImage },
   props: {
     body: {
       type: Object,
