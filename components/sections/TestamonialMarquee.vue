@@ -8,14 +8,14 @@
     class="py-10 my-10 bg-gradient-to-b from-transparent via-gray-200 to-transparent"
   >
     <div
-      class="ml-6 inline-block"
+      class="ml-12 inline-block"
       v-for="(testamonial, index) in testamonials"
       :key="testamonial._uid"
     >
       <testamonial-card
         :body="testamonial.content"
-        class="transform-gpu rotate-3"
-        :class="{ '-rotate-3': index % 2 }"
+        class="transform-gpu max-w-md"
+        :class="index % 2 ? '-rotate-3' : 'rotate-3'"
       ></testamonial-card>
     </div>
   </vue-marquee>
