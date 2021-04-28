@@ -11,11 +11,7 @@
 
 <script>
 export default {
-  data() {
-    return {
-      story: { content: {} },
-    };
-  },
+  transition: "slide-up",
   mounted() {
     // Use the input event for instant update of content
     this.$storybridge.on("input", (event) => {
@@ -32,7 +28,19 @@ export default {
       });
     });
   },
-
+  head() {
+    return {
+      title: "Fake snake",
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: "description",
+          name: "description",
+          content: "Bli kund hos fake snake",
+        },
+      ],
+    };
+  },
   asyncData(context) {
     // // This what would we do in real project
     // const version = context.query._storybody || context.isDev ? 'draft' : 'published'
@@ -40,7 +48,7 @@ export default {
 
     // Load the JSON from the API - loadig the home content (index page)
     return context.app.$storyapi
-      .get(`cdn/stories/${context.params.pathMatch}`, {
+      .get("cdn/stories/en/home", {
         version: "draft",
       })
       .then((res) => {
@@ -54,7 +62,6 @@ export default {
             message: "Failed to receive content from api",
           });
         } else {
-          console.error("sdsdsd", JSON.stringify(context.params));
           console.error(res.response.data);
           context.error({
             statusCode: res.response.status,
@@ -86,16 +93,6 @@ export default {
 
       context.store.commit("articles/setArticles", articlesRefRes.data.stories);
       context.store.commit("articles/setLoaded", "1");
-    }
-
-    // links for breadcrumbs, sitemap...
-    if (context.store.state.links.loaded !== "1") {
-      let linksRefRes = await context.app.$storyapi.get(`cdn/links/`, {
-        version: "draft",
-      });
-      //console.warn('SDDDDDDDDDDDDDDDDDDsdsdds!!!!!!!!', linksRefRes.data.links);
-      context.store.commit("links/setLinks", linksRefRes.data.links);
-      context.store.commit("links/setLoaded", "1");
     }
   },
 };

@@ -1,7 +1,7 @@
 <template>
   <div v-editable="body" :class="{'md:flex-row-reverse': body.left}" class="flex flex-col-reverse md:flex-row max-w-xl md:max-w-7xl mx-auto">
     <div class="hidden md:block relative h-96 w-1/2">
-      <story-image :class="body.cover ? 'object-cover': 'object-contain'" class="h-96 inset-y-0 w-full" :image="body.image" />
+      <story-image :classes="'h-96 inset-y-0 w-full ' + (body.cover ? 'object-cover': 'object-contain')" :image="body.image" />
       <svg
         data-v-ebdc76f4=""
         fill="currentColor"

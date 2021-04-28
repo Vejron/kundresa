@@ -40,7 +40,7 @@ export default {
 
     // Load the JSON from the API - loadig the home content (index page)
     return context.app.$storyapi
-      .get(`cdn/stories/${context.params.pathMatch}`, {
+      .get(`cdn/stories/en/${context.params.pathMatch}`, {
         version: "draft",
       })
       .then((res) => {

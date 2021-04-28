@@ -69,7 +69,7 @@ export default {
   ],
 
   tailwindcss: {
-    jit: true // change when it works
+    jit: false // change when it works
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
