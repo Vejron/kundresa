@@ -6,6 +6,7 @@
     <BottomNav2 />
     <Consent />
     <portal-target name="modal"/>
+    
   </div>
 </template>
 
