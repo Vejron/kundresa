@@ -37,6 +37,7 @@ export default {
   data() {
     return {
       animatedValue: 0,
+      other: 0
     };
   },
   mounted() {
