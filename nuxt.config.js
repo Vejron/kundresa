@@ -75,7 +75,9 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'sv'
+      lang: 'sv',
+      description: 'Fixa trixka och koppla in',
+      theme_color: '#91b943'
     },
     /*workbox: {
       swURL: 'OneSignalSDKWorker.js'
