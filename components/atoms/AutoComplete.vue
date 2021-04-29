@@ -63,6 +63,7 @@
       <li
         v-else
         v-for="(result, i) in results"
+        @click="onClick"
         :key="i"
         class="autocomplete-result"
         :class="{ 'is-active': isSelected(i) }"
@@ -70,7 +71,7 @@
         :id="getId(i)"
         :aria-selected="isSelected(i)"
       >
-        <nuxt-link :to="`/${result.full_slug}`" class="block truncate">
+        <nuxt-link :to="`/${result.full_slug}`" class="block truncate px-3 py-2">
           {{ displayResult(result) }}
         </nuxt-link>
       </li>
@@ -135,6 +136,11 @@ export default defineComponent({
 
     displayResult(result) {
       return result.name;
+    },
+
+    onClick() {
+      this.isOpen = false;
+      this.arrowCounter = -1;
     },
 
     onArrowDown(evt) {
@@ -202,23 +208,14 @@ export default defineComponent({
 }
 
 .autocomplete-results {
-  @apply absolute z-50;
-  @apply mt-2;
-  @apply rounded-md;
-  @apply bg-white;
-  @apply shadow-md;
-  @apply border;
-  @apply border-gray-200 shadow-xl;
+  @apply absolute bg-white mt-2 rounded-md shadow-lg z-50 border border-gray-200;
   max-height: 20rem;
   overflow: auto;
 }
 
 .autocomplete-result {
-  list-style: none;
-  text-align: left;
-  @apply px-3;
-  @apply py-2;
-  cursor: pointer;
+  
+ 
 }
 
 .autocomplete-result.is-active,

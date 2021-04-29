@@ -8,9 +8,10 @@
         <div
           class="system-bar text-xs flex justify-between items-center px-4 h-10"
         >
-          <div class="flex items-center divide-x divide-gray-300">
-            <a href="https://focused-morse-35e7c8.netlify.app/login" class="pr-2">Mina sidor</a>
-            <nuxt-link to="/" class="pl-2">Företag</nuxt-link>
+          <div class="flex items-center justify-center divide-x divide-gray-300">
+            
+            <language-switch class="pr-2"></language-switch>
+            <a href="https://focused-morse-35e7c8.netlify.app/login" class="pl-2">Mina sidor</a>
           </div>
           <div>
             <a href="https://drift.villmindre.com">Driftstatus</a>
