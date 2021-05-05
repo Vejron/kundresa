@@ -17,20 +17,21 @@ export default {
     };
   },
   mounted() {
-    // Use the input event for instant update of content
-    this.$storybridge.on("input", (event) => {
-      if (event.story.id === this.story.id) {
-        this.story.content = event.story.content;
-      }
-    });
-    // Use the bridge to listen the events
-    this.$storybridge.on(["published", "change"], (event) => {
-      // window.location.reload()
-      this.$nuxt.$router.go({
-        path: this.$nuxt.$router.currentRoute,
-        force: true,
-      });
-    });
+    this.$storybridge(() => {
+      const storyblokInstance = new StoryblokBridge()
+
+      storyblokInstance.on(['input', 'published', 'change'], (event) => {
+        if (event.action == 'input') {
+          if (event.story.id === this.story.id) {
+            this.story.content = event.story.content
+          }
+        } else {
+          window.location.reload()
+        }
+      })
+    }, (error) => {
+      console.error(error)
+    })
   },
 
   asyncData(context) {
@@ -40,8 +41,9 @@ export default {
 
     // Load the JSON from the API - loadig the home content (index page)
     return context.app.$storyapi
-      .get(`cdn/stories/en/${context.params.pathMatch}`, {
+      .get(`cdn/stories/${context.params.pathMatch}`, {
         version: "draft",
+        language: "en"
       })
       .then((res) => {
         return res.data;
@@ -54,7 +56,7 @@ export default {
             message: "Failed to receive content from api",
           });
         } else {
-          console.error("sdsdsd", JSON.stringify(context.params));
+          console.error("sdsdsd bllbb", JSON.stringify(context.params));
           console.error(res.response.data);
           context.error({
             statusCode: res.response.status,
