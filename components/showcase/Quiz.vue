@@ -5,7 +5,7 @@
     </div>
     <div v-if="quizes" class="max-w-xl mx-auto">
       <ul class="">
-        <li v-for="q in quizes" :key="q.question" class="mb-16 px-6 pt-6 pb-10 shadow-xl bg-pink-100 rounded-lg">
+        <li v-for="q in quizes" :key="q.question" class=" overflow-hidden mb-16 px-6 pt-6 pb-10 shadow-xl bg-pink-100 rounded-lg">
           <p v-html="q.question" class="font-semibold"></p>
           <ul class="mt-6 relative">
             <li class="text-gray-600" v-for="(alt, i) in q.alts" :key="i">
@@ -15,6 +15,7 @@
               </label>
               
             </li>
+            <div class="transform -rotate-45 translate-x-20 -translate-y-3 text-sm text-gray-600 absolute right-0 px-20 py-2 bg-green-400 rounded-lg shadow font-semibold">{{q.difficulty}}</div>
             <div v-if="q.model" class="mt-2 absolute h-24">
               <li v-if="q.model == q.correct_answer" class="text-green-400 animate-bounce">Japp där satt den!</li>
               <li v-else class="text-red-400 ">Nähä du det va fel!</li>
@@ -37,15 +38,15 @@ export default defineComponent({
       required: true,
     },
   },
-  setup() {
+  setup(props) {
     const quizes = ref(null);
     const getAlts = (q) => {
       const array = [...q.incorrect_answers, q.correct_answer]
       return array.sort(() => Math.random() - 0.5);
       
     }
-    getQuiz().then(res => {
-      console.log("quiz: ", res.data.results);
+    getQuiz(props.body.amount, props.body.difficulty).then(res => {
+      console.log("quiz: ", props);
       const qs = res.data.results;
       qs.forEach(element => {
         element.model = null;
