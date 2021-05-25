@@ -9,20 +9,20 @@
           <p v-html="q.question" class="font-semibold"></p>
           <ul class="mt-6 relative">
             <li class="text-gray-600" v-for="(alt, i) in q.alts" :key="i">
-              <input type="radio" :value="alt" v-model="q.model">
+              <label>
+                <input type="radio" :value="alt" v-model="q.model">
               <span v-html="alt"></span>
+              </label>
+              
             </li>
             <div v-if="q.model" class="mt-2 absolute h-24">
               <li v-if="q.model == q.correct_answer" class="text-green-400 ">Japp där satt den!</li>
               <li v-else class="text-red-400 ">Nähä du det va fel!</li>
             </div>
-            
           </ul>
-         
         </li>
       </ul>
     </div>
-    
   </section>
 </template>
 
