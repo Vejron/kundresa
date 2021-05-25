@@ -5,7 +5,7 @@
     </div>
     <div v-if="quizes" class="max-w-xl mx-auto">
       <ul class="">
-        <li v-for="q in quizes" :key="q.question" class="mb-16">
+        <li v-for="q in quizes" :key="q.question" class="mb-16 px-6 pt-6 pb-10 shadow-xl bg-pink-100 rounded-lg">
           <p v-html="q.question" class="font-semibold"></p>
           <ul class="mt-6 relative">
             <li class="text-gray-600" v-for="(alt, i) in q.alts" :key="i">
@@ -16,7 +16,7 @@
               
             </li>
             <div v-if="q.model" class="mt-2 absolute h-24">
-              <li v-if="q.model == q.correct_answer" class="text-green-400 ">Japp där satt den!</li>
+              <li v-if="q.model == q.correct_answer" class="text-green-400 animate-bounce">Japp där satt den!</li>
               <li v-else class="text-red-400 ">Nähä du det va fel!</li>
             </div>
           </ul>
