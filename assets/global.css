@@ -60,3 +60,17 @@ html {
   opacity: 0;
   transform: translateY(-10px);
 }
+
+.stamp-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.stamp-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.stamp-enter,
+.stamp-leave-to {
+  transform: translateX(20px) scale(2);
+  opacity: 0;
+}
