@@ -10,7 +10,7 @@
           <ul class="mt-6 relative">
             <li class="text-gray-600" v-for="(alt, i) in q.alts" :key="i">
               <input type="radio" :value="alt" v-model="q.model">
-              {{alt}}
+              <span v-html="alt"></span>
             </li>
             <div v-if="q.model" class="mt-2 absolute h-24">
               <li v-if="q.model == q.correct_answer" class="text-green-400 ">Japp där satt den!</li>
